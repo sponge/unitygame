@@ -12,7 +12,7 @@ public class PlayerSpawner : MonoBehaviour {
     {
         playerAsset = Resources.Load("KeenPlayer");
 
-        var world = GameObject.Find("smw");
+        var world = GameObject.Find("map");
         var tiledMap = world.GetComponent<TiledMap>();
 
         var boundariesCam = mainCamera.GetComponent<ProCamera2DNumericBoundaries>();

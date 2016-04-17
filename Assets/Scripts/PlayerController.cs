@@ -5,10 +5,14 @@ using Prime31;
 public class PlayerController : MonoBehaviour {
     private int idleAnim = Animator.StringToHash("player_idle");
     private int runAnim = Animator.StringToHash("player_run");
+    private int skidAnim = Animator.StringToHash("player_skid");
+    private int pogoAnim = Animator.StringToHash("player_pogo");
 
     private CharacterController2D _controller;
     private Animator _animator;
     private SpriteRenderer _sprite;
+
+    private TextMesh debugText;
 
     public float gravity;
     public float jumpHeight;
@@ -43,19 +47,13 @@ public class PlayerController : MonoBehaviour {
         _controller = GetComponent<CharacterController2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
+        debugText = GameObject.Find("DebugText").GetComponent<TextMesh>();
     }
-
-
-    // Use this for initialization
-    void Start()
-    {
-	
-	}
 
     private float getAccel(Direction direction)
     {
         var vel = _controller.velocity;
-        var isSkidding = ((direction == Direction.Left && vel.x > 0) || (direction == Direction.Right && vel.y < 0));
+        var isSkidding = ((direction == Direction.Left && vel.x > 0) || (direction == Direction.Right && vel.x < 0));
 
         if (Time.time < stunTime)
         {
@@ -73,6 +71,11 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (debugText)
+        {
+            debugText.text = "";
+        }
+
         var leftPress = Input.GetKey(KeyCode.LeftArrow);
         var downPress = Input.GetKey(KeyCode.DownArrow);
         var rightPress = Input.GetKey(KeyCode.RightArrow);
@@ -85,17 +88,16 @@ public class PlayerController : MonoBehaviour {
         {
             didJump = false;
             canDoubleJump = false;
-        } else
-        {
-            vel.y -= gravity * Time.deltaTime;
         }
+
+        vel.y -= gravity * Time.deltaTime;
 
         // FIXME: check for goal time and dont move. prob a better way to do this in unity.
 
         //var wasSliding = wallSliding;
         wallSliding = false;
         canWallJump = !_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right);
-        // FIXME: isGrounded doesn't seem to work right in corners in my test map
+
         if (vel.y < 0 && canWallJump)
         {
             wallSliding = true;
@@ -122,7 +124,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (!_controller.isGrounded && (vel.y < 0 || !willPogo))
+        if (!_controller.isGrounded && (vel.y > 0 || !willPogo))
         {
             willPogo = downPress;
         }
@@ -174,18 +176,11 @@ public class PlayerController : MonoBehaviour {
 
         // player wants to move left, check what their accel should be
         var lastAccel = accelType;
-        if (leftPress && Time.time > attackTime)
+        if ((leftPress || rightPress) && Time.time > attackTime)
         {
-            accelType = getAccel(Direction.Left);
-            vel.x -= accelType * Time.deltaTime;
-            _sprite.flipX = true;
-        // player wants to move right
-        } else if (rightPress && Time.time > attackTime)
-        {
-            accelType = getAccel(Direction.Right);
-            vel.x += accelType * Time.deltaTime;
-            _sprite.flipX = false;
-        // player isn't moving, bring them to stop
+            accelType = getAccel(leftPress ? Direction.Left : Direction.Right);
+            vel.x += accelType * Time.deltaTime * (leftPress ? -1 : 1);
+            _sprite.flipX = leftPress;
         } else if (vel.x != 0)
         {
             var friction = (_controller.isGrounded ? groundFriction : airFriction) * Time.deltaTime;
@@ -202,12 +197,28 @@ public class PlayerController : MonoBehaviour {
 
         // FIXME: skid sound
 
-        
         vel.x = Mathf.Clamp(vel.x, -maxSpeed, maxSpeed);
         var uncappedY = vel.y;
         vel.y = Mathf.Clamp(vel.y, -terminalVelocity, terminalVelocity);
 
-        _animator.Play(_controller.isGrounded && vel.x != 0 ? runAnim : idleAnim);
+        if (willPogo)
+        {
+            _animator.Play(pogoAnim);
+        } else if (accelType == skidAccel)
+        {
+            _animator.Play(skidAnim);
+        } else
+        {
+            _animator.Play(_controller.isGrounded && vel.x != 0 ? runAnim : idleAnim);
+        }
+
+        if (debugText)
+        {
+
+            debugText.text += "Grounded: " + _controller.isGrounded + "\n";
+            debugText.text += "Accel: " + accelType + "\n";
+            debugText.text += "Speed: " + vel.x + "\n";
+        }
 
         _controller.move(vel * Time.deltaTime);
 
