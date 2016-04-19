@@ -32,7 +32,9 @@ class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
 
             // Use the position of the game object we're attached to
             spawnInstance.transform.parent = gameObject.transform;
-            spawnInstance.transform.localPosition = Vector3.zero;
+
+            var spr = spawnInstance.GetComponent<SpriteRenderer>();
+            spawnInstance.transform.localPosition = new Vector2(spr.sprite.rect.width / 2, spr.sprite.rect.height / 2);
         }
     }
 
