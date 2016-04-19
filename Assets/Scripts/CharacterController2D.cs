@@ -160,7 +160,7 @@ public class CharacterController2D : MonoBehaviour
 	/// <summary>
 	/// stores our raycast hit during movement
 	/// </summary>
-	RaycastHit2D _raycastHit;
+    RaycastHit2D[] _raycastList;
 
 	/// <summary>
 	/// stores any raycast hits that occur this frame. we have to store them in case we get a hit moving
@@ -364,12 +364,17 @@ public class CharacterController2D : MonoBehaviour
 			// if we are grounded we will include oneWayPlatforms only on the first ray (the bottom one). this will allow us to
 			// walk up sloped oneWayPlatforms
 			if( i == 0 && collisionState.wasGroundedLastFrame )
-				_raycastHit = Physics2D.Raycast( ray, rayDirection, rayDistance, platformMask );
+				_raycastList = Physics2D.RaycastAll( ray, rayDirection, rayDistance, platformMask );
 			else
-				_raycastHit = Physics2D.Raycast( ray, rayDirection, rayDistance, platformMask & ~oneWayPlatformMask );
+				_raycastList = Physics2D.RaycastAll( ray, rayDirection, rayDistance, platformMask & ~oneWayPlatformMask );
 
-			if( _raycastHit )
+            foreach (var _raycastHit in _raycastList)
 			{
+                if (_raycastHit.collider == boxCollider)
+                {
+                    continue;
+                }
+
 				// the bottom ray can hit a slope but no other ray can so we have special handling for these cases
 				if( i == 0 && handleHorizontalSlope( ref deltaMovement, Vector2.Angle( _raycastHit.normal, Vector2.up ) ) )
 				{
@@ -398,7 +403,7 @@ public class CharacterController2D : MonoBehaviour
 				// we add a small fudge factor for the float operations here. if our rayDistance is smaller
 				// than the width + fudge bail out because we have a direct impact
 				if( rayDistance < _skinWidth + kSkinWidthFloatFudgeFactor )
-					break;
+					return;
 			}
 		}
 	}
@@ -436,14 +441,19 @@ public class CharacterController2D : MonoBehaviour
 				// safety check. we fire a ray in the direction of movement just in case the diagonal we calculated above ends up
 				// going through a wall. if the ray hits, we back off the horizontal movement to stay in bounds.
 				var ray = isGoingRight ? _raycastOrigins.bottomRight : _raycastOrigins.bottomLeft;
-				RaycastHit2D raycastHit;
+				RaycastHit2D[] raycastList;
 				if( collisionState.wasGroundedLastFrame )
-					raycastHit = Physics2D.Raycast( ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask );
+					raycastList = Physics2D.RaycastAll( ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask );
 				else
-					raycastHit = Physics2D.Raycast( ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask & ~oneWayPlatformMask );
+					raycastList = Physics2D.RaycastAll( ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask & ~oneWayPlatformMask );
 
-				if( raycastHit )
+				foreach (var raycastHit in raycastList)
 				{
+                    if (raycastHit.collider == boxCollider)
+                    {
+                        continue;
+                    }
+
 					// we crossed an edge when using Pythagoras calculation, so we set the actual delta movement to the ray hit location
 					deltaMovement = (Vector3)raycastHit.point - ray;
 					if( isGoingRight )
@@ -485,11 +495,16 @@ public class CharacterController2D : MonoBehaviour
 			var ray = new Vector2( initialRayOrigin.x + i * _horizontalDistanceBetweenRays, initialRayOrigin.y );
 
 			DrawRay( ray, rayDirection * rayDistance, Color.red );
-			_raycastHit = Physics2D.Raycast( ray, rayDirection, rayDistance, mask );
-			if( _raycastHit )
-			{
-				// set our new deltaMovement and recalculate the rayDistance taking it into account
-				deltaMovement.y = _raycastHit.point.y - ray.y;
+            _raycastList = Physics2D.RaycastAll(ray, rayDirection, rayDistance, mask);
+
+            foreach (var _raycastHit in _raycastList)
+            {
+                if (_raycastHit.collider == boxCollider)
+                {
+                    continue;
+                }
+                // set our new deltaMovement and recalculate the rayDistance taking it into account
+                deltaMovement.y = _raycastHit.point.y - ray.y;
 				rayDistance = Mathf.Abs( deltaMovement.y );
 
 				// remember to remove the skinWidth from our deltaMovement
@@ -514,7 +529,7 @@ public class CharacterController2D : MonoBehaviour
 				// we add a small fudge factor for the float operations here. if our rayDistance is smaller
 				// than the width + fudge bail out because we have a direct impact
 				if( rayDistance < _skinWidth + kSkinWidthFloatFudgeFactor )
-					break;
+					return;
 			}
 		}
 	}
@@ -536,9 +551,14 @@ public class CharacterController2D : MonoBehaviour
 
 		var slopeRay = new Vector2( centerOfCollider, _raycastOrigins.bottomLeft.y );
 		DrawRay( slopeRay, rayDirection * slopeCheckRayDistance, Color.yellow );
-		_raycastHit = Physics2D.Raycast( slopeRay, rayDirection, slopeCheckRayDistance, platformMask );
-		if( _raycastHit )
+		_raycastList = Physics2D.RaycastAll( slopeRay, rayDirection, slopeCheckRayDistance, platformMask );
+		foreach (var _raycastHit in _raycastList)
 		{
+            if (_raycastHit.collider == boxCollider)
+            {
+                continue;
+            }
+
 			// bail out if we have no slope
 			var angle = Vector2.Angle( _raycastHit.normal, Vector2.up );
 			if( angle == 0 )
