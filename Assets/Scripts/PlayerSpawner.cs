@@ -2,6 +2,7 @@
 using System.Collections;
 using Com.LuisPedroFonseca.ProCamera2D;
 using Tiled2Unity;
+using UnityEngine.SceneManagement;
 
 public class PlayerSpawner : MonoBehaviour {
 
@@ -42,8 +43,10 @@ public class PlayerSpawner : MonoBehaviour {
 	void Update() {
 	    if (!spawnInstance && Input.GetKey(KeyCode.Z))
         {
-            mainCamera.RemoveAllCameraTargets();
-            SpawnPlayer();
+            //mainCamera.RemoveAllCameraTargets();
+            //SpawnPlayer();
+            var currentScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentScene);
         }
 	}
 }

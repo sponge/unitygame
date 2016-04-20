@@ -1852,6 +1852,7 @@ MonoBehaviour:
   currentHealth: 0
   hurtCooldown: 1
   invulnerable: 0
+  fadeOnInvulnerable: 1
 --- !u!114 &11446854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1868,6 +1869,7 @@ MonoBehaviour:
   currentHealth: 0
   hurtCooldown: 1
   invulnerable: 0
+  fadeOnInvulnerable: 1
 --- !u!114 &11447412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1913,6 +1915,7 @@ MonoBehaviour:
   currentHealth: 0
   hurtCooldown: 1
   invulnerable: 0
+  fadeOnInvulnerable: 1
 --- !u!114 &11476322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2013,6 +2016,7 @@ MonoBehaviour:
   currentHealth: 0
   hurtCooldown: 1
   invulnerable: 0
+  fadeOnInvulnerable: 1
 --- !u!114 &11488406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2076,6 +2080,7 @@ MonoBehaviour:
   currentHealth: 0
   hurtCooldown: 1
   invulnerable: 0
+  fadeOnInvulnerable: 1
 --- !u!212 &21233570
 SpriteRenderer:
   m_ObjectHideFlags: 1

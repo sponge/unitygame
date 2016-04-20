@@ -98,6 +98,7 @@ MonoBehaviour:
   currentHealth: 0
   hurtCooldown: 1
   invulnerable: 0
+  fadeOnInvulnerable: 1
 --- !u!114 &11419642
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -168,11 +168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a1a1e389c7df46af6b53f4bff4801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  startingHealth: 1
+  maxHealth: 3
+  startingHealth: 3
   currentHealth: 0
   hurtCooldown: 2
   invulnerable: 0
+  fadeOnInvulnerable: 1
 --- !u!114 &11497626
 MonoBehaviour:
   m_ObjectHideFlags: 1
