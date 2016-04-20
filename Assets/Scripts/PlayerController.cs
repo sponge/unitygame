@@ -8,9 +8,10 @@ public class PlayerController : MonoBehaviour {
     private int skidAnim = Animator.StringToHash("player_skid");
     private int pogoAnim = Animator.StringToHash("player_pogo");
 
-    private CharacterController2D _controller;
-    private Animator _animator;
-    private SpriteRenderer _sprite;
+    private CharacterController2D controller;
+    private Animator animator;
+    private SpriteRenderer sprite;
+    private BoxCollider2D swordCollider;
 
     private TextMesh debugText;
 
@@ -41,18 +42,32 @@ public class PlayerController : MonoBehaviour {
 
     enum Direction { Left, Right };
 
+    void onTriggerEnterEvent( Collider2D hit )
+    {
+        Debug.Log("trigger enter");
+
+        var hurtable = hit.GetComponent<Hurtable>();
+        if (hurtable)
+        {
+            hurtable.Hurt(666);
+        }
+    }
+
 
     void Awake()
     {
-        _controller = GetComponent<CharacterController2D>();
-        _animator = GetComponent<Animator>();
-        _sprite = GetComponent<SpriteRenderer>();
+        controller = GetComponent<CharacterController2D>();
+        animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+        swordCollider = GetComponentInChildren<BoxCollider2D>();
         debugText = GameObject.Find("DebugText").GetComponent<TextMesh>();
+
+        controller.onTriggerEnterEvent += onTriggerEnterEvent;
     }
 
     private float getAccel(Direction direction)
     {
-        var vel = _controller.velocity;
+        var vel = controller.velocity;
         var isSkidding = ((direction == Direction.Left && vel.x > 0) || (direction == Direction.Right && vel.x < 0));
 
         if (Time.time < stunTime)
@@ -60,7 +75,7 @@ public class PlayerController : MonoBehaviour {
             return 0;
         }
 
-        if (!_controller.isGrounded)
+        if (!controller.isGrounded)
         {
             return isSkidding ? turnAirAccel : airAccel;
         }
@@ -82,9 +97,9 @@ public class PlayerController : MonoBehaviour {
         var jumpPress = Input.GetKey(KeyCode.Z);
         var attackPress = Input.GetKey(KeyCode.X);
 
-        var vel = _controller.velocity;
+        var vel = controller.velocity;
 
-        if (_controller.isGrounded)
+        if (controller.isGrounded)
         {
             didJump = false;
             canDoubleJump = false;
@@ -96,7 +111,7 @@ public class PlayerController : MonoBehaviour {
 
         //var wasSliding = wallSliding;
         wallSliding = false;
-        canWallJump = !_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right);
+        canWallJump = !controller.isGrounded && (controller.collisionState.left || controller.collisionState.right);
 
         if (vel.y < 0 && canWallJump)
         {
@@ -124,13 +139,13 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (!_controller.isGrounded && (vel.y > 0 || !willPogo))
+        if (!controller.isGrounded && (vel.y > 0 || !willPogo))
         {
             willPogo = downPress;
         }
 
         // check for pogo jump
-        if (_controller.isGrounded && willPogo)
+        if (controller.isGrounded && willPogo)
         {
             vel.y = pogoJumpHeight;
             canDoubleJump = true;
@@ -150,7 +165,7 @@ public class PlayerController : MonoBehaviour {
                 didJump = true;
                 // FIXME: jump sound here
             // check for first jump
-            } else if (_controller.isGrounded)
+            } else if (controller.isGrounded)
             {
                 vel.y = jumpHeight + (Mathf.Abs(vel.x) >= maxSpeed * 0.25 ? speedJumpBonus : 0);
                 jumpHeld = true;
@@ -168,6 +183,11 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        if (attackHeld && !attackPress && Time.time > attackTime)
+        {
+            attackHeld = false;
+        }
+
         if (attackPress && !attackHeld)
         {
             attackTime = Time.time + attackLength;
@@ -180,10 +200,10 @@ public class PlayerController : MonoBehaviour {
         {
             accelType = getAccel(leftPress ? Direction.Left : Direction.Right);
             vel.x += accelType * Time.deltaTime * (leftPress ? -1 : 1);
-            _sprite.flipX = leftPress;
+            sprite.flipX = leftPress;
         } else if (vel.x != 0)
         {
-            var friction = (_controller.isGrounded ? groundFriction : airFriction) * Time.deltaTime;
+            var friction = (controller.isGrounded ? groundFriction : airFriction) * Time.deltaTime;
             if (friction > Mathf.Abs(vel.x))
             {
                 vel.x = 0;
@@ -203,28 +223,28 @@ public class PlayerController : MonoBehaviour {
 
         if (willPogo)
         {
-            _animator.Play(pogoAnim);
+            animator.Play(pogoAnim);
         } else if (accelType == skidAccel)
         {
-            _animator.Play(skidAnim);
+            animator.Play(skidAnim);
         } else
         {
-            _animator.Play(_controller.isGrounded && vel.x != 0 ? runAnim : idleAnim);
+            animator.Play(controller.isGrounded && vel.x != 0 ? runAnim : idleAnim);
         }
 
         if (debugText)
         {
 
-            debugText.text += "Grounded: " + _controller.isGrounded + "\n";
+            debugText.text += "Grounded: " + controller.isGrounded + "\n";
             debugText.text += "Accel: " + accelType + "\n";
             debugText.text += "Speed: " + vel.x + "\n";
         }
 
-        _controller.move(vel * Time.deltaTime);
+        controller.move(vel * Time.deltaTime);
 
-        if (vel.y > 0 && !_controller.collisionState.above)
+        if (vel.y > 0 && !controller.collisionState.above)
         {
-            _controller.velocity.y = uncappedY;
+            controller.velocity.y = uncappedY;
         }
 	}
 }

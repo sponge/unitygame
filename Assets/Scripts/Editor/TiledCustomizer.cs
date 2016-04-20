@@ -9,33 +9,36 @@ class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
     public void HandleCustomProperties(GameObject gameObject,
         IDictionary<string, string> keyValuePairs)
     {
-        if (!keyValuePairs.ContainsKey("prefab"))
+
+        if (keyValuePairs.ContainsKey("trigger"))
         {
-            Debug.Log("No prefab key found");
-            return;
+            var collider = gameObject.GetComponent<Collider2D>();
+            collider.isTrigger = true;
         }
 
-        // Remove old tile object
-        Transform oldTileObject = gameObject.transform.Find("TileObject");
-
-        if (oldTileObject != null)
+        if (keyValuePairs.ContainsKey("prefab"))
         {
-            Object.DestroyImmediate(oldTileObject.gameObject);
+            Transform oldTileObject = gameObject.transform.Find("TileObject");
+            if (oldTileObject != null)
+            {
+                Object.DestroyImmediate(oldTileObject.gameObject);
+            }
+
+            Object spawn = AssetDatabase.LoadAssetAtPath(keyValuePairs["prefab"], typeof(GameObject));
+            if (spawn != null)
+            {
+                // Replace with new spawn object
+                GameObject spawnInstance = (GameObject)Object.Instantiate(spawn);
+                spawnInstance.name = spawn.name;
+
+                // Use the position of the game object we're attached to
+                spawnInstance.transform.parent = gameObject.transform;
+
+                var spr = spawnInstance.GetComponent<SpriteRenderer>();
+                spawnInstance.transform.localPosition = new Vector2(spr.sprite.rect.width / 2, spr.sprite.rect.height / 2);
+            }
         }
 
-        Object spawn = AssetDatabase.LoadAssetAtPath(keyValuePairs["prefab"], typeof(GameObject));
-        if (spawn != null)
-        {
-            // Replace with new spawn object
-            GameObject spawnInstance = (GameObject) Object.Instantiate(spawn);
-            spawnInstance.name = spawn.name;
-
-            // Use the position of the game object we're attached to
-            spawnInstance.transform.parent = gameObject.transform;
-
-            var spr = spawnInstance.GetComponent<SpriteRenderer>();
-            spawnInstance.transform.localPosition = new Vector2(spr.sprite.rect.width / 2, spr.sprite.rect.height / 2);
-        }
     }
 
     public void CustomizePrefab(GameObject prefab)

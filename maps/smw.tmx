@@ -384,7 +384,7 @@
   </object>
   <object id="84" x="16" y="336" width="16" height="32">
    <properties>
-    <property name="trigger" value="start"/>
+    <property name="trigger" value="spawn"/>
     <property name="unity:tag" value="spawn"/>
    </properties>
   </object>

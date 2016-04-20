@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 4/19/2016 5:47:07 PM-->
+<!--Last exported: 4/19/2016 7:17:02 PM-->
 <Tiled2Unity version="1.0.4.8">
   <AssignMaterial mesh="mesh_0001" material="smw" />
   <AssignMaterial mesh="mesh_0002" material="smw" />
@@ -204,7 +204,7 @@
         <BoxCollider2D width="32" height="37" />
       </GameObject>
       <GameObject name="RectangleObject" x="16" y="-336" rotation="0" tag="spawn">
-        <Property name="trigger" value="start" />
+        <Property name="trigger" value="spawn" />
         <BoxCollider2D width="16" height="32" />
       </GameObject>
     </GameObject>
