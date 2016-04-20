@@ -7,11 +7,12 @@ public class PlayerController : MonoBehaviour {
     private int runAnim = Animator.StringToHash("player_run");
     private int skidAnim = Animator.StringToHash("player_skid");
     private int pogoAnim = Animator.StringToHash("player_pogo");
+    private int swordAnim = Animator.StringToHash("player_sword");
 
     private CharacterController2D controller;
     private Animator animator;
     private SpriteRenderer sprite;
-    private BoxCollider2D swordCollider;
+    private BaseWeapon weapon;
 
     private TextMesh debugText;
 
@@ -24,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     public float wallJumpX;
     public float maxSpeed, terminalVelocity;
     public float speedJumpBonus;
-    public float attackLength;
     public float airAccel, turnAirAccel;
     public float accel, skidAccel;
     public float groundFriction, airFriction;
@@ -36,33 +36,19 @@ public class PlayerController : MonoBehaviour {
     private bool jumpHeld;
     private bool willPogo;
     private float stunTime;
-    private bool attackHeld;
-    private float attackTime;
     private float accelType;
 
     enum Direction { Left, Right };
 
-    void onTriggerEnterEvent( Collider2D hit )
-    {
-        Debug.Log("trigger enter");
-
-        var hurtable = hit.GetComponent<Hurtable>();
-        if (hurtable)
-        {
-            hurtable.Hurt(666);
-        }
-    }
-
-
     void Awake()
     {
         controller = GetComponent<CharacterController2D>();
+
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        swordCollider = GetComponentInChildren<BoxCollider2D>();
-        debugText = GameObject.Find("DebugText").GetComponent<TextMesh>();
+        weapon = GetComponent<BaseWeapon>();
 
-        controller.onTriggerEnterEvent += onTriggerEnterEvent;
+        debugText = GameObject.Find("DebugText").GetComponent<TextMesh>();
     }
 
     private float getAccel(Direction direction)
@@ -183,24 +169,18 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (attackHeld && !attackPress && Time.time > attackTime)
+        if (weapon)
         {
-            attackHeld = false;
-        }
-
-        if (attackPress && !attackHeld)
-        {
-            attackTime = Time.time + attackLength;
-            attackHeld = true;
+            weapon.UpdatePress(attackPress);
         }
 
         // player wants to move left, check what their accel should be
         var lastAccel = accelType;
-        if ((leftPress || rightPress) && Time.time > attackTime)
+        if ((leftPress || rightPress) && !weapon.isFiring())
         {
             accelType = getAccel(leftPress ? Direction.Left : Direction.Right);
             vel.x += accelType * Time.deltaTime * (leftPress ? -1 : 1);
-            sprite.flipX = leftPress;
+            transform.localScale = new Vector3(leftPress ? -1 : 1, 1, 0);
         } else if (vel.x != 0)
         {
             var friction = (controller.isGrounded ? groundFriction : airFriction) * Time.deltaTime;
@@ -221,7 +201,10 @@ public class PlayerController : MonoBehaviour {
         var uncappedY = vel.y;
         vel.y = Mathf.Clamp(vel.y, -terminalVelocity, terminalVelocity);
 
-        if (willPogo)
+        if (weapon && weapon.isFiring())
+        {
+            animator.Play(swordAnim);
+        } else if (willPogo)
         {
             animator.Play(pogoAnim);
         } else if (accelType == skidAccel)

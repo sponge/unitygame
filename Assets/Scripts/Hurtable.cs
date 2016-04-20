@@ -6,35 +6,53 @@ public class Hurtable : MonoBehaviour {
     public int maxHealth;
     public int startingHealth;
     public int currentHealth;
+    public float hurtCooldown;
     public bool invulnerable;
 
     public event Action onHurt;
     public event Action onDeath;
 
+    private float lastHurtTime;
 
-    // Use this for initialization
     void Start () {
         currentHealth = startingHealth;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-        if (onHurt != null)
+
+    }
+
+    public bool canTakeDamage()
+    {
+        if (invulnerable)
         {
-            onHurt();
+            return false;
         }
+
+        if (Time.time < lastHurtTime)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void Hurt(int amount)
     {
-        if (amount < 0)
+        if (amount < 0 || !canTakeDamage())
         {
             return;
         }
 
         currentHealth -= amount;
+        lastHurtTime = Time.time + hurtCooldown;
 
-        if (currentHealth < 0)
+        if (onHurt != null)
+        {
+            onHurt();
+        }
+
+        if (currentHealth <= 0)
         {
             if (onDeath != null)
             {

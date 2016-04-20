@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11463468}
   - 212: {fileID: 21240126}
   - 95: {fileID: 9502814}
+  - 114: {fileID: 11497626}
   m_Layer: 8
   m_Name: KeenPlayer
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -202.74693, y: -366.13516, z: 0}
+  m_LocalPosition: {x: 153.32826, y: -335.3833, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,7 +103,6 @@ MonoBehaviour:
   maxSpeed: 170
   terminalVelocity: 230
   speedJumpBonus: 45
-  attackLength: 0.25
   airAccel: 190
   turnAirAccel: 325
   accel: 175
@@ -156,6 +156,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   totalHorizontalRays: 5
   totalVerticalRays: 3
+--- !u!114 &11497626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7f6aa9432fa054fb0c2bddebbbf0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handOffset: {x: 1, y: -1, z: 0}
+  length: 18
 --- !u!212 &21240126
 SpriteRenderer:
   m_ObjectHideFlags: 1

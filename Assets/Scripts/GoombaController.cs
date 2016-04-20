@@ -5,6 +5,8 @@ using Prime31;
 public class GoombaController : MonoBehaviour {
 
     private CharacterController2D controller;
+    private SpriteRenderer sprite;
+    private Hurtable hurtable;
 
     public float gravity;
     public float speed;
@@ -13,9 +15,10 @@ public class GoombaController : MonoBehaviour {
 
 	void Start () {
         controller = GetComponent<CharacterController2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        hurtable = GetComponent<Hurtable>();
     }
 	
-	// Update is called once per frame
 	void Update () {
         var vel = controller.velocity;
 
@@ -31,5 +34,7 @@ public class GoombaController : MonoBehaviour {
         gameObject.layer = 31;
         controller.move(vel * Time.deltaTime);
         gameObject.layer = oldLayer;
+
+        sprite.color = new Color(1.0f, 1.0f, 1.0f, hurtable.canTakeDamage() ? 1.0f : 0.5f);
     }
 }

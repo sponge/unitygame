@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 89ba4e33bedfa3648a975728e05941fc
-timeCreated: 1460914491
+timeCreated: 1461173303
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -19,6 +19,7 @@ TextureImporter:
     21300024: player_12
     21300026: player_13
     21300028: player_14
+    21300030: player_15
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -228,6 +229,17 @@ TextureImporter:
         height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: player_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.27, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []
