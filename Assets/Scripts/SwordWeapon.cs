@@ -59,13 +59,4 @@ public class SwordWeapon : BaseWeapon
             }
         }
     }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        var hurtable = other.GetComponent<Hurtable>();
-        if (hurtable)
-        {
-            
-        }
-    }
 }
