@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     private SpriteRenderer sprite;
     private BaseWeapon weapon;
+    private Hurtable hurtable;
 
     private TextMesh debugText;
 
@@ -43,10 +44,12 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         controller = GetComponent<CharacterController2D>();
-
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         weapon = GetComponent<BaseWeapon>();
+
+        hurtable = GetComponent<Hurtable>();
+        hurtable.onDeath += OnDeath;
 
         debugText = GameObject.Find("DebugText").GetComponent<TextMesh>();
     }
@@ -230,4 +233,10 @@ public class PlayerController : MonoBehaviour {
             controller.velocity.y = uncappedY;
         }
 	}
+
+    void OnDeath()
+    {
+        debugText.text = "You died! Press jump to respawn";
+        Destroy(gameObject);
+    }
 }

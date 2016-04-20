@@ -3,9 +3,12 @@ using System.Collections;
 
 public class SwordWeapon : BaseWeapon
 {
-
     public Vector3 handOffset;
     public float length;
+
+    private bool isReady;
+    private bool attackHeld;
+    private float attackTime;
 
     override public void Start()
     {
@@ -46,7 +49,7 @@ public class SwordWeapon : BaseWeapon
             var hitList = Physics2D.RaycastAll(transform.position + handOffset, dir, length * transform.localScale.x);
             foreach (var hit in hitList)
             {
-                if (this == hit.collider)
+                if (gameObject == hit.collider.gameObject)
                 {
                     continue;
                 }

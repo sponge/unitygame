@@ -15,6 +15,7 @@ GameObject:
   - 212: {fileID: 21240126}
   - 95: {fileID: 9502814}
   - 114: {fileID: 11497626}
+  - 114: {fileID: 11483956}
   m_Layer: 8
   m_Name: KeenPlayer
   m_TagString: Untagged
@@ -156,6 +157,22 @@ MonoBehaviour:
     m_RotationOrder: 4
   totalHorizontalRays: 5
   totalVerticalRays: 3
+--- !u!114 &11483956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611a1a1e389c7df46af6b53f4bff4801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  startingHealth: 1
+  currentHealth: 0
+  hurtCooldown: 2
+  invulnerable: 0
 --- !u!114 &11497626
 MonoBehaviour:
   m_ObjectHideFlags: 1

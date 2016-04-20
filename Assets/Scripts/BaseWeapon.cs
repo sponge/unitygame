@@ -2,11 +2,6 @@
 using System.Collections;
 
 public class BaseWeapon : MonoBehaviour {
-
-    protected bool isReady;
-    protected bool attackHeld;
-    protected float attackTime;
-
     public virtual void Start () {
 	
 	}

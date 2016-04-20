@@ -13,8 +13,18 @@ public class GoombaController : MonoBehaviour {
 
     private bool flipSpeed;
 
+    private void onTriggerStayEvent(Collider2D hit)
+    {
+        var hurtable = hit.GetComponent<Hurtable>();
+        if (hurtable)
+        {
+            hurtable.Hurt(1);
+        }
+    }
+
 	void Start () {
         controller = GetComponent<CharacterController2D>();
+        controller.onTriggerStayEvent += onTriggerStayEvent;
         sprite = GetComponent<SpriteRenderer>();
         hurtable = GetComponent<Hurtable>();
     }
