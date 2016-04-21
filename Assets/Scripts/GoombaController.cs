@@ -49,9 +49,11 @@ public class GoombaController : MonoBehaviour {
 
     void onHurt(int amt, Vector3 dir)
     {
-		flipSpeed = dir.x > 0;
-		controller.velocity.x = dir.x < 0 ? 80 : -80;
-		controller.velocity.y = 200;
-		controller.move(controller.velocity * Time.deltaTime);
+		if (dir.y < 0.7f) {
+			flipSpeed = dir.x > 0;
+			controller.velocity.x = dir.x < 0 ? 80 : -80;
+			controller.velocity.y = 200;
+			controller.move (controller.velocity * Time.deltaTime);
+		}
     }
 }
