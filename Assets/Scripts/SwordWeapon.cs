@@ -58,7 +58,7 @@ public class SwordWeapon : BaseWeapon
                 var hurt = hit.collider.gameObject.GetComponent<Hurtable>();
                 if (hurt)
                 {
-                    hurt.Hurt(damage);
+                    hurt.Hurt(damage, transform.position + handOffset);
                 }
             }
         }

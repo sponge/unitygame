@@ -17,7 +17,7 @@ public class GoombaController : MonoBehaviour {
         var hurtable = hit.GetComponent<Hurtable>();
         if (hurtable && !hurtComponent.isOnDamageCooldown())
         {
-            hurtable.Hurt(1);
+            hurtable.Hurt(1, transform.position);
         }
     }
 
@@ -26,6 +26,7 @@ public class GoombaController : MonoBehaviour {
         controller.onTriggerStayEvent += onTriggerStayEvent;
 
         hurtComponent = GetComponent<Hurtable>();
+        hurtComponent.onHurt += onHurt;
     }
 	
 	void Update () {
@@ -43,5 +44,10 @@ public class GoombaController : MonoBehaviour {
         gameObject.layer = 31;
         controller.move(vel * Time.deltaTime);
         gameObject.layer = oldLayer;
+    }
+
+    void onHurt(int amt, Vector2 dir)
+    {
+
     }
 }

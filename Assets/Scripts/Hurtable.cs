@@ -10,7 +10,7 @@ public class Hurtable : MonoBehaviour {
     public bool invulnerable = true;
     public bool fadeOnInvulnerable;
 
-    public event Action onHurt;
+    public event Action<int, Vector2> onHurt;
     public event Action onDeath;
 
     private float lastHurtTime;
@@ -51,7 +51,7 @@ public class Hurtable : MonoBehaviour {
         return true;
     }
 
-    public void Hurt(int amount)
+    public void Hurt(int amount, Vector2 dir)
     {
         if (amount < 0 || !canTakeDamage())
         {
@@ -73,7 +73,8 @@ public class Hurtable : MonoBehaviour {
 
         if (onHurt != null)
         {
-            onHurt();
+            // FIXME: return a normalized vector with the angle that got hurt from?
+            onHurt(amount, dir);
         }
 
         if (currentHealth <= 0)
