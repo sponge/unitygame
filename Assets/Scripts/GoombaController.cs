@@ -5,6 +5,7 @@ using Prime31;
 public class GoombaController : MonoBehaviour {
 
     private CharacterController2D controller;
+    private Hurtable hurtComponent;
 
     public float gravity;
     public float speed;
@@ -14,7 +15,7 @@ public class GoombaController : MonoBehaviour {
     private void onTriggerStayEvent(Collider2D hit)
     {
         var hurtable = hit.GetComponent<Hurtable>();
-        if (hurtable)
+        if (hurtable && !hurtComponent.isOnDamageCooldown())
         {
             hurtable.Hurt(1);
         }
@@ -23,6 +24,8 @@ public class GoombaController : MonoBehaviour {
 	void Start () {
         controller = GetComponent<CharacterController2D>();
         controller.onTriggerStayEvent += onTriggerStayEvent;
+
+        hurtComponent = GetComponent<Hurtable>();
     }
 	
 	void Update () {

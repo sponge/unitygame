@@ -220,10 +220,7 @@ public class PlayerController : MonoBehaviour {
 
         if (debugText)
         {
-
-            debugText.text += "Grounded: " + controller.isGrounded + "\n";
-            debugText.text += "Accel: " + accelType + "\n";
-            debugText.text += "Speed: " + vel.x + "\n";
+            debugText.text += "Health: " + hurtable.currentHealth + "/" + hurtable.maxHealth +"\n";
         }
 
         controller.move(vel * Time.deltaTime);

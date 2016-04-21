@@ -171,7 +171,7 @@ MonoBehaviour:
   maxHealth: 3
   startingHealth: 3
   currentHealth: 0
-  hurtCooldown: 2
+  damageCooldownTime: 2
   invulnerable: 0
   fadeOnInvulnerable: 1
 --- !u!114 &11497626

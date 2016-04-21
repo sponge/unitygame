@@ -6,7 +6,7 @@ public class Hurtable : MonoBehaviour {
     public int maxHealth;
     public int startingHealth;
     public int currentHealth;
-    public float hurtCooldown;
+    public float damageCooldownTime;
     public bool invulnerable = true;
     public bool fadeOnInvulnerable;
 
@@ -17,16 +17,23 @@ public class Hurtable : MonoBehaviour {
 
     private SpriteRenderer sprite;
 
-    void Start () {
+    void Start ()
+    {
         currentHealth = startingHealth;
         sprite = GetComponent<SpriteRenderer>();
 	}
 
-	void Update () {
+	void Update ()
+    {
         if (sprite && fadeOnInvulnerable)
         {
-            sprite.color = new Color(1.0f, 1.0f, 1.0f, canTakeDamage() ? 1.0f : 0.5f);
+            sprite.color = new Color(1.0f, 1.0f, 1.0f, isOnDamageCooldown() ? 0.5f : 1.0f);
         }
+    }
+
+    public bool isOnDamageCooldown()
+    {
+        return Time.time < lastHurtTime;
     }
 
     public bool canTakeDamage()
@@ -52,7 +59,7 @@ public class Hurtable : MonoBehaviour {
         }
 
         currentHealth -= amount;
-        lastHurtTime = Time.time + hurtCooldown;
+        lastHurtTime = Time.time + damageCooldownTime;
 
         if (onHurt != null)
         {
