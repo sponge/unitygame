@@ -60,9 +60,12 @@ public class PlayerController : MonoBehaviour {
     {
 		var hurtComp = obj.GetComponent<Hurtable>();
 		if (hurtComp && willPogo) {
-			hurtComp.Hurt(2, col.bounds.center);
-			controller.velocity.y = pogoJumpHeight;
-			controller.move(controller.velocity * Time.deltaTime);
+			var normal = Vector3.Normalize (new Vector3(col.bounds.center.x, col.bounds.min.y) - obj.bounds.center);
+			if (normal.y > 0.5f) {
+				hurtComp.Hurt (2, col.bounds.center);
+				controller.velocity.y = pogoJumpHeight;
+				controller.move (controller.velocity * Time.deltaTime);
+			}
 		}
     }
 
