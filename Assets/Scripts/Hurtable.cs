@@ -61,6 +61,16 @@ public class Hurtable : MonoBehaviour {
         currentHealth -= amount;
         lastHurtTime = Time.time + damageCooldownTime;
 
+        var sprite = gameObject.GetComponent<Renderer>();
+        if (sprite)
+        {
+            var dmgObj = (GameObject)Instantiate(Resources.Load("DamageNumber"));
+            dmgObj.transform.localPosition = new Vector3(sprite.transform.position.x, sprite.bounds.max.y + 5, -50);
+            var dmg = dmgObj.GetComponent<DamageNumber>();
+            dmg.value = amount.ToString();
+            dmg.Trigger();
+        }
+
         if (onHurt != null)
         {
             onHurt();

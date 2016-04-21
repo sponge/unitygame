@@ -5,6 +5,7 @@ public class SwordWeapon : BaseWeapon
 {
     public Vector3 handOffset;
     public float length;
+    public int damage;
 
     private bool isReady;
     private bool attackHeld;
@@ -57,7 +58,7 @@ public class SwordWeapon : BaseWeapon
                 var hurt = hit.collider.gameObject.GetComponent<Hurtable>();
                 if (hurt)
                 {
-                    hurt.Hurt(1);
+                    hurt.Hurt(damage);
                 }
             }
         }
