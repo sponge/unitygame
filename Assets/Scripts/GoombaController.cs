@@ -31,23 +31,26 @@ public class GoombaController : MonoBehaviour {
 	
 	void Update () {
         var vel = controller.velocity;
-
+			
         if (controller.collisionState.left || controller.collisionState.right)
         {
             flipSpeed = !flipSpeed;
         }
 
-        vel.x = speed * (flipSpeed ? -1 : 1);
+		if (controller.isGrounded)
+		{
+			vel.x = speed * (flipSpeed ? -1 : 1);
+		}
+
         vel.y -= 625 * Time.deltaTime;
 
-        var oldLayer = this.gameObject.layer;
-        gameObject.layer = 31;
         controller.move(vel * Time.deltaTime);
-        gameObject.layer = oldLayer;
     }
 
-    void onHurt(int amt, Vector2 dir)
+    void onHurt(int amt, Vector3 dir)
     {
-
+		controller.velocity.x = dir.x < 0 ? 80 : -80;
+		controller.velocity.y = 200;
+		controller.move(controller.velocity * Time.deltaTime);
     }
 }
