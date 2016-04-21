@@ -51,6 +51,25 @@ public class Hurtable : MonoBehaviour {
         return true;
     }
 
+	private void CheckDeath() {
+		if (currentHealth <= 0)
+		{
+			if (onDeath != null)
+			{
+				onDeath();
+			} else
+			{
+				Destroy(this.gameObject);
+			}
+		}
+	}
+
+	public void InstaGib()
+	{
+		currentHealth = 0;
+		CheckDeath ();
+	}
+
     public void Hurt(int amount, Vector3 dir)
     {
         if (amount < 0 || !canTakeDamage())
@@ -77,15 +96,6 @@ public class Hurtable : MonoBehaviour {
             onHurt(amount, hurtDirection);
         }
 
-        if (currentHealth <= 0)
-        {
-            if (onDeath != null)
-            {
-                onDeath();
-            } else
-            {
-                Destroy(this.gameObject);
-            }
-        }
+		CheckDeath();
     }
 }

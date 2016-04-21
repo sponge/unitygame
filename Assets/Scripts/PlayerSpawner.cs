@@ -10,10 +10,11 @@ public class PlayerSpawner : MonoBehaviour {
     public ProCamera2D mainCamera;
 
     private GameObject spawnInstance;
+	private TiledMap tiledMap;
 
     void Awake()
     {
-        var tiledMap = GameObject.FindObjectOfType<TiledMap>();
+        tiledMap = GameObject.FindObjectOfType<TiledMap>();
 
         var boundariesCam = mainCamera.GetComponent<ProCamera2DNumericBoundaries>();
         boundariesCam.BottomBoundary = -tiledMap.MapHeightInPixels;
@@ -41,6 +42,12 @@ public class PlayerSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
+		if (spawnInstance) {
+			// fell out of the map
+			if (spawnInstance.gameObject.transform.position.y + 100 < -tiledMap.MapHeightInPixels) {
+				spawnInstance.gameObject.GetComponent<Hurtable>().InstaGib();
+			}
+		}
 	    if (!spawnInstance && Input.GetKey(KeyCode.Z))
         {
             //mainCamera.RemoveAllCameraTargets();
