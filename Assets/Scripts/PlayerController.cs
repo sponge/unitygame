@@ -11,9 +11,9 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController2D controller;
     private Animator animator;
-    private SpriteRenderer sprite;
     private BaseWeapon weapon;
     private Hurtable hurtable;
+	private Collider2D col;
 
     private TextMesh debugText;
 
@@ -44,14 +44,26 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         controller = GetComponent<CharacterController2D>();
+		controller.onTriggerEnterEvent += onTriggerEnterEvent;
+
         animator = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
         weapon = GetComponent<BaseWeapon>();
+		col = GetComponent<Collider2D>();
 
         hurtable = GetComponent<Hurtable>();
         hurtable.onDeath += OnDeath;
 
         debugText = GameObject.Find("DebugText").GetComponent<TextMesh>();
+    }
+
+    void onTriggerEnterEvent (Collider2D obj)
+    {
+		var hurtComp = obj.GetComponent<Hurtable>();
+		if (hurtComp && willPogo) {
+			hurtComp.Hurt(2, col.bounds.center);
+			controller.velocity.y = pogoJumpHeight;
+			controller.move(controller.velocity * Time.deltaTime);
+		}
     }
 
     private float getAccel(Direction direction)

@@ -169,6 +169,26 @@ Prefab:
       propertyPath: m_Name
       value: map
       objectReference: {fileID: 0}
+    - target: {fileID: 11441140, guid: df9ceda6ad2634d439623e8517a5d3a7, type: 2}
+      propertyPath: damageCooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11402530, guid: df9ceda6ad2634d439623e8517a5d3a7, type: 2}
+      propertyPath: damageCooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444098, guid: df9ceda6ad2634d439623e8517a5d3a7, type: 2}
+      propertyPath: damageCooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11495130, guid: df9ceda6ad2634d439623e8517a5d3a7, type: 2}
+      propertyPath: damageCooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444092, guid: df9ceda6ad2634d439623e8517a5d3a7, type: 2}
+      propertyPath: damageCooldownTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df9ceda6ad2634d439623e8517a5d3a7, type: 2}
   m_IsPrefabParent: 0
