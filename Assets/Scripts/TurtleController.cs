@@ -105,6 +105,7 @@ public class TurtleController : MonoBehaviour {
 	{
 		inShell = true;
 		animator.Play (shellSpinAnim);
+		leaveShellTime = 0;
 
 		if (dir.y < 0.7f) {
 			controller.velocity.y = 200;
@@ -116,6 +117,6 @@ public class TurtleController : MonoBehaviour {
 		
 	bool HurtComponent_canHurt (int amt, Vector3 dir)
 	{
-		return !inShell;
+		return !inShell || (inShell && leaveShellTime != 0 && (leaveShellTime - Time.time) / shellStillDuration < 0.5);
 	}
 }
