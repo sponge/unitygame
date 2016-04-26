@@ -10,6 +10,7 @@ public class Hurtable : MonoBehaviour {
     public bool invulnerable = true;
     public bool fadeOnInvulnerable;
 
+	public event Func<int, Vector3, bool> canHurt;
     public event Action<int, Vector3> onHurt;
     public event Action onDeath;
 
@@ -36,7 +37,7 @@ public class Hurtable : MonoBehaviour {
         return Time.time < lastHurtTime;
     }
 
-    public bool canTakeDamage()
+	public bool canTakeDamage(int amount, Vector3 dir)
     {
         if (invulnerable)
         {
@@ -47,6 +48,10 @@ public class Hurtable : MonoBehaviour {
         {
             return false;
         }
+
+		if (canHurt != null && !canHurt (amount, dir)) {
+			return false;
+		}
 
         return true;
     }
@@ -70,17 +75,19 @@ public class Hurtable : MonoBehaviour {
 		CheckDeath ();
 	}
 
-    public void Hurt(int amount, Vector3 dir)
+    public bool Hurt(int amount, Vector3 dir)
     {
-        if (amount < 0 || !canTakeDamage())
+		dir = Vector3.Normalize(dir - transform.position);
+
+		if (amount < 0 || !canTakeDamage(amount, dir))
         {
-            return;
+            return false;
         }
 
         currentHealth -= amount;
         lastHurtTime = Time.time + damageCooldownTime;
 
-        var sprite = gameObject.GetComponent<Renderer>();
+		var sprite = gameObject.GetComponent<Renderer>();
         if (sprite)
         {
             var dmgObj = (GameObject)Instantiate(Resources.Load("DamageNumber"));
@@ -92,10 +99,10 @@ public class Hurtable : MonoBehaviour {
 
         if (onHurt != null)
         {
-			var hurtDirection = dir = Vector3.Normalize(dir - sprite.transform.position);
-            onHurt(amount, hurtDirection);
+            onHurt(amount, dir);
         }
 
 		CheckDeath();
+		return true;
     }
 }

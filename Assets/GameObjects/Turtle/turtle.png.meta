@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dc443b96441b4b040a17c903d4c8e002
-timeCreated: 1460913882
+timeCreated: 1461556262
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,7 @@ TextureImporter:
     21300010: turtle_5
     21300012: turtle_6
     21300014: turtle_7
+    21300016: turtle_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -37,7 +38,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -52,7 +53,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -64,9 +65,9 @@ TextureImporter:
         x: 0
         y: 0
         width: 16
-        height: 26
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: turtle_1
@@ -76,8 +77,8 @@ TextureImporter:
         y: 0
         width: 16
         height: 27
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: turtle_2
@@ -86,9 +87,9 @@ TextureImporter:
         x: 34
         y: 0
         width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: turtle_3
@@ -97,9 +98,9 @@ TextureImporter:
         x: 51
         y: 0
         width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: turtle_4
@@ -108,9 +109,9 @@ TextureImporter:
         x: 68
         y: 0
         width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: turtle_5
@@ -119,9 +120,9 @@ TextureImporter:
         x: 85
         y: 0
         width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: turtle_6
@@ -130,9 +131,9 @@ TextureImporter:
         x: 102
         y: 0
         width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: turtle_7
@@ -141,9 +142,20 @@ TextureImporter:
         x: 119
         y: 0
         width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: turtle_8
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 0
+        width: 100
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []
