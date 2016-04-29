@@ -7,7 +7,7 @@ public class GameSession : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         DontDestroyOnLoad(this);
-        SceneManager.LoadScene("Levels/smw");
+        SceneManager.LoadScene("Levels/blockout");
 	}
 	
 	// Update is called once per frame
