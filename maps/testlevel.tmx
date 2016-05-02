@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" backgroundcolor="#a8a8a8" nextobjectid="29">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" backgroundcolor="#a8a8a8" nextobjectid="36">
  <properties>
   <property name="author" value="sponge"/>
   <property name="title" value="slightly less stolen test map"/>
  </properties>
  <tileset firstgid="1" source="tilesets/keen1.tsx"/>
  <tileset firstgid="612" source="tilesets/keen3.tsx"/>
+ <tileset firstgid="1236" source="tilesets/objects.tsx"/>
  <layer name="background" width="100" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -172,17 +173,8 @@
 </data>
  </layer>
  <objectgroup color="#8f84a4" name="objects">
-  <object id="26" type="goal" x="864" y="732" width="32" height="37"/>
- </objectgroup>
- <objectgroup name="triggers">
-  <properties>
-   <property name="unity:layer" value="Triggers"/>
-  </properties>
-  <object id="28" x="48" y="736" width="16" height="32">
-   <properties>
-    <property name="trigger" value="spawn"/>
-    <property name="unity:tag" value="spawn"/>
-   </properties>
-  </object>
+  <object id="32" gid="1242" x="64" y="768" width="16" height="16"/>
+  <object id="33" gid="1241" x="528" y="704" width="16" height="16"/>
+  <object id="34" gid="1239" x="880" y="768" width="16" height="16"/>
  </objectgroup>
 </map>

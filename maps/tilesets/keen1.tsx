@@ -2,9 +2,6 @@
 <tileset name="keen1" tilewidth="16" tileheight="16" tilecount="611" columns="13">
  <image source="keen1.png" width="208" height="752"/>
  <tile id="179">
-  <properties>
-   <property name="unity:layer" value="Platforms"/>
-  </properties>
   <objectgroup draworder="index">
    <object id="0" x="0" y="0">
     <polyline points="0,0 16,0"/>
@@ -42,9 +39,6 @@
   </objectgroup>
  </tile>
  <tile id="225">
-  <properties>
-   <property name="unity:layer" value="Platforms"/>
-  </properties>
   <objectgroup draworder="index">
    <object id="0" x="0" y="0">
     <polyline points="0,0 16,0"/>
@@ -52,9 +46,6 @@
   </objectgroup>
  </tile>
  <tile id="226">
-  <properties>
-   <property name="unity:layer" value="Platforms"/>
-  </properties>
   <objectgroup draworder="index">
    <object id="0" x="0" y="0">
     <polyline points="0,0 16,0"/>
@@ -62,9 +53,6 @@
   </objectgroup>
  </tile>
  <tile id="227">
-  <properties>
-   <property name="unity:layer" value="Platforms"/>
-  </properties>
   <objectgroup draworder="index">
    <object id="0" x="0" y="0">
     <polyline points="0,0 16,0"/>

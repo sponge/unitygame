@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" nextobjectid="2">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" nextobjectid="12">
  <tileset firstgid="1" name="blockout" tilewidth="16" tileheight="16" tilecount="256" columns="16">
   <image source="tilesets/blockout.png" width="256" height="256"/>
   <tile id="1">
@@ -186,6 +186,7 @@
    </objectgroup>
   </tile>
  </tileset>
+ <tileset firstgid="257" source="tilesets/objects.tsx"/>
  <layer name="world" width="60" height="30">
   <data encoding="csv">
 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
@@ -257,15 +258,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="triggers">
-  <properties>
-   <property name="unity:layer" value="Triggers"/>
-  </properties>
-  <object id="1" x="32" y="416" width="16" height="32">
-   <properties>
-    <property name="trigger" value="spawn"/>
-    <property name="unity:tag" value="spawn"/>
-   </properties>
-  </object>
+ <objectgroup name="objects">
+  <object id="3" gid="263" x="32" y="448" width="16" height="16"/>
+  <object id="4" gid="261" x="176" y="160" width="16" height="16"/>
+  <object id="5" gid="261" x="112" y="208" width="16" height="16"/>
+  <object id="6" gid="261" x="64" y="272" width="16" height="16"/>
+  <object id="7" gid="261" x="112" y="304" width="16" height="16"/>
+  <object id="8" gid="261" x="208" y="448" width="16" height="16"/>
+  <object id="9" gid="262" x="240" y="304" width="16" height="16"/>
+  <object id="10" gid="260" x="672" y="448" width="16" height="16"/>
  </objectgroup>
 </map>

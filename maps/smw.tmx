@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="26" tilewidth="16" tileheight="16" backgroundcolor="#9ee4dc" nextobjectid="86">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="26" tilewidth="16" tileheight="16" backgroundcolor="#9ee4dc" nextobjectid="117">
  <properties>
   <property name="author" value="sponge"/>
   <property name="background" value="base/smw_bg.png"/>
@@ -7,6 +7,7 @@
  </properties>
  <tileset firstgid="1" source="tilesets/smw.tsx"/>
  <tileset firstgid="2353" source="tilesets/keen1.tsx"/>
+ <tileset firstgid="2964" source="tilesets/objects.tsx"/>
  <layer name="world" width="200" height="26">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -71,46 +72,33 @@
 </data>
  </layer>
  <objectgroup name="objects">
-  <object id="14" gid="8" x="144" y="304" width="16" height="16"/>
-  <object id="15" gid="8" x="144" y="320" width="16" height="16"/>
-  <object id="16" gid="8" x="144" y="336" width="16" height="16"/>
-  <object id="18" gid="8" x="112" y="336" width="16" height="16"/>
-  <object id="19" gid="8" x="96" y="336" width="16" height="16"/>
-  <object id="21" gid="8" x="192" y="336" width="16" height="16"/>
-  <object id="22" gid="8" x="208" y="336" width="16" height="16"/>
-  <object id="23" gid="8" x="224" y="336" width="16" height="16"/>
-  <object id="25" gid="1646" x="224" y="288" width="16" height="16"/>
-  <object id="26" gid="1646" x="512" y="272" width="16" height="16"/>
-  <object id="27" gid="1646" x="16" y="304" width="16" height="16"/>
-  <object id="29" gid="1646" x="256" y="48" width="16" height="16"/>
-  <object id="42" gid="8" x="80" y="336" width="16" height="16"/>
-  <object id="43" gid="8" x="80" y="256" width="16" height="16"/>
-  <object id="44" gid="8" x="112" y="208" width="16" height="16"/>
-  <object id="45" gid="8" x="144" y="160" width="16" height="16"/>
-  <object id="52" gid="8" x="128" y="336" width="16" height="16"/>
-  <object id="53" gid="8" x="192" y="240" width="16" height="16"/>
-  <object id="60" gid="1646" x="48" y="368" width="16" height="16"/>
-  <object id="68" gid="1650" x="336" y="304" width="16" height="16"/>
-  <object id="69" gid="1650" x="352" y="304" width="16" height="16"/>
-  <object id="70" gid="1650" x="384" y="304" width="16" height="16"/>
-  <object id="71" gid="1650" x="416" y="304" width="16" height="16"/>
-  <object id="72" gid="1650" x="448" y="304" width="16" height="16"/>
-  <object id="85" gid="3" x="96" y="304" width="16" height="16"/>
- </objectgroup>
- <objectgroup name="triggers">
-  <properties>
-   <property name="unity:layer" value="Triggers"/>
-  </properties>
-  <object id="83" x="590" y="320" width="32" height="37">
-   <properties>
-    <property name="trigger" value="goal"/>
-   </properties>
-  </object>
-  <object id="84" x="16" y="336" width="16" height="32">
-   <properties>
-    <property name="trigger" value="spawn"/>
-    <property name="unity:tag" value="spawn"/>
-   </properties>
-  </object>
+  <object id="89" gid="2970" x="16" y="368" width="16" height="16"/>
+  <object id="90" gid="2965" x="48" y="368" width="16" height="16"/>
+  <object id="91" gid="2965" x="16" y="304" width="16" height="16"/>
+  <object id="92" gid="2965" x="256" y="48" width="16" height="16"/>
+  <object id="93" gid="2965" x="224" y="288" width="16" height="16"/>
+  <object id="94" gid="2965" x="512" y="272" width="16" height="16"/>
+  <object id="95" gid="2968" x="336" y="304" width="16" height="16"/>
+  <object id="96" gid="2968" x="352" y="304" width="16" height="16"/>
+  <object id="97" gid="2968" x="384" y="304" width="16" height="16"/>
+  <object id="98" gid="2968" x="416" y="304" width="16" height="16"/>
+  <object id="99" gid="2968" x="448" y="304" width="16" height="16"/>
+  <object id="100" gid="2969" x="272" y="288" width="16" height="16"/>
+  <object id="101" gid="2964" x="192" y="336" width="16" height="16"/>
+  <object id="102" gid="2964" x="208" y="336" width="16" height="16"/>
+  <object id="103" gid="2964" x="224" y="336" width="16" height="16"/>
+  <object id="104" gid="2964" x="80" y="336" width="16" height="16"/>
+  <object id="105" gid="2964" x="96" y="336" width="16" height="16"/>
+  <object id="106" gid="2964" x="112" y="336" width="16" height="16"/>
+  <object id="107" gid="2964" x="128" y="336" width="16" height="16"/>
+  <object id="108" gid="2964" x="144" y="336" width="16" height="16"/>
+  <object id="109" gid="2964" x="144" y="320" width="16" height="16"/>
+  <object id="110" gid="2964" x="144" y="304" width="16" height="16"/>
+  <object id="111" gid="2964" x="192" y="240" width="16" height="16"/>
+  <object id="112" gid="2964" x="80" y="256" width="16" height="16"/>
+  <object id="113" gid="2964" x="112" y="208" width="16" height="16"/>
+  <object id="114" gid="2964" x="144" y="160" width="16" height="16"/>
+  <object id="115" gid="2967" x="592" y="368" width="16" height="16"/>
+  <object id="116" gid="2966" x="80" y="304" width="16" height="16"/>
  </objectgroup>
 </map>

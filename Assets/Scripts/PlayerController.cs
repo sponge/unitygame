@@ -67,6 +67,12 @@ public class PlayerController : MonoBehaviour {
 				controller.move (controller.velocity * Time.deltaTime);
 			}
 		}
+
+        var goalComp = obj.GetComponent<GoalController>();
+        if (goalComp)
+        {
+            goalComp.StartLevelExit();   
+        }
     }
 
     private float getAccel(Direction direction)
@@ -110,8 +116,6 @@ public class PlayerController : MonoBehaviour {
         }
 
         vel.y -= gravity * Time.deltaTime;
-
-        // FIXME: check for goal time and dont move. prob a better way to do this in unity.
 
         //var wasSliding = wallSliding;
         wallSliding = false;

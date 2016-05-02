@@ -3,13 +3,22 @@ using System.Collections;
 
 public class GoalController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    GameSession session;
+
+    public void Awake()
+    {
+        session = FindObjectOfType<GameSession>();
+    }
+
+    public void StartLevelExit()
+    {
+        var players = FindObjectsOfType<PlayerController>();
+        foreach (var player in players)
+        {
+            player.enabled = false;
+            player.GetComponent<Hurtable>().invulnerable = true;
+        }
+
+        session.EndLevel();
+    }
 }

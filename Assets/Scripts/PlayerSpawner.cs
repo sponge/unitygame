@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Com.LuisPedroFonseca.ProCamera2D;
 using Tiled2Unity;
 using UnityEngine.SceneManagement;
@@ -30,14 +29,18 @@ public class PlayerSpawner : MonoBehaviour {
         var spawnList = GameObject.FindGameObjectsWithTag("spawn");
         if (spawnList.Length == 0)
         {
-            // bad!
+            // FIXME: bad!
         }
 
-        var pos = spawnList[0].transform.localPosition;
-        spawnInstance.transform.localPosition = new Vector2(pos.x, pos.y);
+        var pos = spawnList[0].transform.position;
+        // FIXME: hardcoded numbers
+        pos.x += 8;
+        pos.y += 11;
+
+        spawnInstance.transform.localPosition = pos;
 
         mainCamera.AddCameraTarget(spawnInstance.transform);
-        mainCamera.MoveCameraInstantlyToPosition(pos);
+        mainCamera.MoveCameraInstantlyToPosition(spawnList[0].transform.position);
     }
 	
 	// Update is called once per frame
