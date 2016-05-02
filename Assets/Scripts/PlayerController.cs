@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Prime31;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     private int idleAnim = Animator.StringToHash("player_idle");
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     private Hurtable hurtable;
 	private Collider2D col;
 
-    private TextMesh debugText;
+    private Text debugText;
 
     public float gravity;
     public float jumpHeight;
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour {
         hurtable = GetComponent<Hurtable>();
         hurtable.onDeath += OnDeath;
 
-        debugText = GameObject.Find("DebugText").GetComponent<TextMesh>();
+        debugText = GameObject.Find("DebugText").GetComponent<Text>();
     }
 
     void onTriggerEnterEvent (Collider2D obj)
