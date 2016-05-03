@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="30" tilewidth="16" tileheight="16" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="30" tilewidth="16" tileheight="16" nextobjectid="10">
  <tileset firstgid="1" source="tilesets/blockout.tsx"/>
  <tileset firstgid="257" source="tilesets/objects.tsx"/>
  <layer name="world" width="23" height="30">
@@ -22,7 +22,7 @@
 2,2,2,2,2,4,1,1,0,1,0,0,0,0,0,0,3,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,21,1,0,0,0,0,0,3,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,21,0,0,0,0,3,2,2,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,0,0,0,3,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,0,260,0,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,0,0,0,6,5,0,23,24,2,2,2,2,2,
@@ -38,6 +38,11 @@
  </layer>
  <objectgroup name="objects">
   <object id="1" gid="263" x="48" y="416" width="16" height="16"/>
+  <object id="8" x="144" y="272" width="80" height="16">
+   <properties>
+    <property name="hideIfCompleted" type="int" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="triggers">
   <properties>
@@ -46,18 +51,21 @@
   <object id="2" x="240" y="352" width="48" height="48">
    <properties>
     <property name="destination" value="smw"/>
+    <property name="id" type="int" value="1"/>
     <property name="trigger" value="LevelEntrance"/>
    </properties>
   </object>
   <object id="6" x="160" y="288" width="48" height="48">
    <properties>
     <property name="destination" value="blockout"/>
+    <property name="id" type="int" value="2"/>
     <property name="trigger" value="LevelEntrance"/>
    </properties>
   </object>
   <object id="7" x="160" y="160" width="48" height="48">
    <properties>
     <property name="destination" value="testlevel"/>
+    <property name="id" type="int" value="3"/>
     <property name="trigger" value="LevelEntrance"/>
    </properties>
   </object>

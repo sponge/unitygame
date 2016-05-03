@@ -7,13 +7,16 @@ public class PlayerSpawner : MonoBehaviour {
 
     public Object playerAsset;
     public ProCamera2D mainCamera;
+    public bool spawnerUsesSavedPosition;
 
     private GameObject spawnInstance;
 	private TiledMap tiledMap;
+    private GameSession session;
 
     void Awake()
     {
-        tiledMap = GameObject.FindObjectOfType<TiledMap>();
+        tiledMap = FindObjectOfType<TiledMap>();
+        session = FindObjectOfType<GameSession>();
 
         var boundariesCam = mainCamera.GetComponent<ProCamera2DNumericBoundaries>();
         boundariesCam.BottomBoundary = -tiledMap.MapHeightInPixels;
@@ -26,21 +29,29 @@ public class PlayerSpawner : MonoBehaviour {
     {
         spawnInstance = (GameObject)Instantiate(playerAsset);
 
-        var spawnList = GameObject.FindGameObjectsWithTag("spawn");
-        if (spawnList.Length == 0)
-        {
-            // FIXME: bad!
-        }
+        Vector3 pos;
 
-        var pos = spawnList[0].transform.position;
-        // FIXME: hardcoded numbers
-        pos.x += 8;
-        pos.y += 11;
+        if (spawnerUsesSavedPosition && session.useSessionPosition)
+        {
+            pos = session.overworldPosition;
+        } else
+        {
+            var spawnList = GameObject.FindGameObjectsWithTag("spawn");
+            if (spawnList.Length == 0)
+            {
+                // FIXME: bad!
+            }
+
+            pos = spawnList[0].transform.position;
+            // FIXME: hardcoded numbers
+            pos.x += 8;
+            pos.y += 11;
+        }
 
         spawnInstance.transform.localPosition = pos;
 
         mainCamera.AddCameraTarget(spawnInstance.transform);
-        mainCamera.MoveCameraInstantlyToPosition(spawnList[0].transform.position);
+        mainCamera.MoveCameraInstantlyToPosition(pos);
     }
 	
 	// Update is called once per frame

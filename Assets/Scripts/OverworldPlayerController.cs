@@ -42,7 +42,7 @@ public class OverworldPlayerController : MonoBehaviour {
 
         if (usePress && currentEntrance != null)
         {
-            currentEntrance.Activate();
+            currentEntrance.Activate(this.gameObject);
         }
 
         var vel = controller.velocity;

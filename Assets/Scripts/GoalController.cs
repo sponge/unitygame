@@ -19,6 +19,6 @@ public class GoalController : MonoBehaviour {
             player.GetComponent<Hurtable>().invulnerable = true;
         }
 
-        session.EndLevel();
+        session.WinLevel();
     }
 }

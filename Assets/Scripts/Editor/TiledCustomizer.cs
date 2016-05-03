@@ -19,8 +19,15 @@ class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
 			case "LevelEntrance":
 				var levelEntrance = gameObject.AddComponent<LevelEntrance> ();
 				levelEntrance.destination = keyValuePairs ["destination"];
+                levelEntrance.levelBit = (int) Mathf.Pow(2, int.Parse(keyValuePairs["id"]));
 				break;
 			}
+        }
+
+        if (keyValuePairs.ContainsKey("hideIfCompleted"))
+        {
+            var barrier = gameObject.AddComponent<BarrierVisibility>();
+            barrier.levelCompletedCondition = (int)Mathf.Pow(2, int.Parse(keyValuePairs["hideIfCompleted"]));
         }
 
         if (keyValuePairs.ContainsKey("prefab"))

@@ -4,7 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour {
 
-    private string overworldScene = "game_launch";
+    public string overworldScene = "game_launch";
+    public int levelCompleteBit;
+    public int currentLevelBit;
+
+    public Vector2 overworldPosition;
+    public bool useSessionPosition;
 
     void Start()
     {
@@ -12,6 +17,7 @@ public class GameSession : MonoBehaviour {
         if (alreadyExists.Length > 1)
         {
             DestroyImmediate(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(this);
@@ -38,9 +44,10 @@ public class GameSession : MonoBehaviour {
         SceneManager.LoadScene(overworldScene);
     }
 
-    public void EndLevel()
+    public void WinLevel()
     {
         StartCoroutine(EndLevelCoroutine());
+        levelCompleteBit += currentLevelBit;
     }
 
     private IEnumerator EndLevelCoroutine() {

@@ -290,6 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAsset: {fileID: 108396, guid: 5ae8032fc2c03fc42afdbc3e3af6f036, type: 2}
   mainCamera: {fileID: 11401270}
+  spawnerUsesSavedPosition: 1
 --- !u!114 &11483714
 MonoBehaviour:
   m_ObjectHideFlags: 1
