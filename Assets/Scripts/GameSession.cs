@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour {
 
+    private string overworldScene = "game_launch";
+
     void Start()
     {
         var alreadyExists = FindObjectsOfType<GameSession>();
@@ -22,13 +24,18 @@ public class GameSession : MonoBehaviour {
 
     public void LoadLevel(string scene, bool isWorld)
     {
-        SceneManager.LoadScene("Levels/" + scene);
+        var sceneName = "Levels/" + scene;
+        SceneManager.LoadScene(sceneName);
+
+        if (isWorld)
+        {
+            overworldScene = sceneName;
+        }
     }
 
     public void ExitLevel()
     {
-        // FIXME: if we have a world map, go back to the world map
-        SceneManager.LoadScene("game_launch");
+        SceneManager.LoadScene(overworldScene);
     }
 
     public void EndLevel()

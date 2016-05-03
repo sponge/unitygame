@@ -6,11 +6,16 @@ using System.Collections.Generic;
 public class MainMenu : MonoBehaviour {
 
     private static List<string> levels = new List<string>() {
-		"overworld",
         "blockout",
         "smw",
         "testlevel"
     };
+
+    public void OverworldClick()
+    {
+        var sess = FindObjectOfType<GameSession>();
+        sess.LoadLevel("overworld", true);
+    }
 
     public void StartClick()
     {
