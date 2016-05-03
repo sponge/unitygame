@@ -61,7 +61,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 469046}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Spawn
   m_TagString: spawn
   m_Icon: {fileID: 0}

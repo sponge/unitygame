@@ -11,7 +11,7 @@ public class GameSession : MonoBehaviour {
         var alreadyExists = FindObjectsOfType<GameSession>();
         if (alreadyExists.Length > 1)
         {
-            DestroyImmediate(this);
+            DestroyImmediate(gameObject);
         }
 
         DontDestroyOnLoad(this);

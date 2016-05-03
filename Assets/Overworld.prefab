@@ -165,7 +165,7 @@ Camera:
   far clip plane: 1000
   field of view: 58
   orthographic: 1
-  orthographic size: 100.5
+  orthographic size: 96.833336
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -322,7 +322,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (Z) Jump    (X) Sword
+  m_Text: (Z) Enter Level
 --- !u!114 &11484344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -389,9 +389,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Health: x/x
-
-'
+  m_Text: 
 --- !u!114 &11488668
 MonoBehaviour:
   m_ObjectHideFlags: 1
