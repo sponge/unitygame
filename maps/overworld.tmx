@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="30" tilewidth="16" tileheight="16" nextobjectid="2">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="30" tilewidth="16" tileheight="16" nextobjectid="4">
  <tileset firstgid="1" source="tilesets/blockout.tsx"/>
  <tileset firstgid="257" source="tilesets/objects.tsx"/>
  <layer name="world" width="23" height="30">
@@ -22,12 +22,12 @@
 2,2,2,2,2,4,1,1,0,1,0,0,0,0,0,0,3,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,21,1,0,0,0,0,0,3,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,21,0,0,0,0,3,2,2,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,4,0,0,3,2,2,2,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,20,0,0,0,0,0,23,24,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,0,0,0,3,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,0,260,0,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,0,0,0,6,5,0,23,24,2,2,2,2,2,
 2,2,2,2,2,2,2,25,26,0,0,0,0,0,0,0,0,0,19,2,2,2,2,
-2,2,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,20,0,0,0,0,0,0,0,0,0,0,0,0,0,260,0,0,2,2,2,2,
 2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,2,2,
 2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,
 2,2,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,
@@ -38,5 +38,16 @@
  </layer>
  <objectgroup name="objects">
   <object id="1" gid="263" x="48" y="416" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="triggers">
+  <properties>
+   <property name="unity:layer" value="Triggers"/>
+  </properties>
+  <object id="2" x="160" y="288" width="48" height="48">
+   <properties>
+    <property name="destination" value="blockout"/>
+    <property name="trigger" value="LevelEntrance"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
