@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class MainMenu : MonoBehaviour {
 
     private static List<string> levels = new List<string>() {
+		"overworld",
         "blockout",
         "smw",
         "testlevel"

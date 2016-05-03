@@ -14,6 +14,13 @@ class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
         {
             var collider = gameObject.GetComponent<Collider2D>();
             collider.isTrigger = true;
+
+			switch (keyValuePairs ["trigger"]) {
+			case "LevelEntrance":
+				var levelEntrance = gameObject.AddComponent<LevelEntrance> ();
+				levelEntrance.destination = keyValuePairs ["destination"];
+				break;
+			}
         }
 
         if (keyValuePairs.ContainsKey("prefab"))
