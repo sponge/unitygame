@@ -31,7 +31,7 @@ public class PlayerSpawner : MonoBehaviour {
 
         Vector3 pos;
 
-        if (spawnerUsesSavedPosition && session.useSessionPosition)
+        if (spawnerUsesSavedPosition && session != null && session.useSessionPosition)
         {
             pos = session.overworldPosition;
         } else

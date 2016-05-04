@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="30" tilewidth="16" tileheight="16" nextobjectid="10">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="30" tilewidth="16" tileheight="16" nextobjectid="24">
  <tileset firstgid="1" source="tilesets/blockout.tsx"/>
  <tileset firstgid="257" source="tilesets/objects.tsx"/>
  <layer name="world" width="23" height="30">
@@ -15,7 +15,7 @@
 2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,
 2,2,2,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,
 2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,
-2,2,2,1,1,1,0,0,0,0,0,260,0,0,0,0,0,0,0,0,1,2,2,
+2,2,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,
 2,2,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,
 2,2,2,4,1,1,1,0,0,0,0,0,0,0,0,0,0,0,7,8,2,2,2,
 2,2,2,2,4,0,1,1,0,1,0,0,0,0,0,0,0,3,2,2,2,2,2,
@@ -23,11 +23,11 @@
 2,2,2,2,2,2,2,2,21,1,0,0,0,0,0,3,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,21,0,0,0,0,3,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,0,260,0,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,0,0,0,6,5,0,23,24,2,2,2,2,2,
 2,2,2,2,2,2,2,25,26,0,0,0,0,0,0,0,0,0,19,2,2,2,2,
-2,2,20,0,0,0,0,0,0,0,0,0,0,0,0,0,260,0,0,2,2,2,2,
+2,2,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
 2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,2,2,
 2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,
 2,2,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,
@@ -48,24 +48,30 @@
   <properties>
    <property name="unity:layer" value="Triggers"/>
   </properties>
-  <object id="2" x="240" y="352" width="48" height="48">
+  <object id="21" x="160" y="288" width="48" height="48">
    <properties>
-    <property name="destination" value="smw"/>
-    <property name="id" type="int" value="1"/>
-    <property name="trigger" value="LevelEntrance"/>
-   </properties>
-  </object>
-  <object id="6" x="160" y="288" width="48" height="48">
-   <properties>
+    <property name="completedImage" value="Assets/Sprites/castle_cleared.png"/>
     <property name="destination" value="blockout"/>
     <property name="id" type="int" value="2"/>
+    <property name="image" value="Assets/Sprites/castle_incomplete.png"/>
     <property name="trigger" value="LevelEntrance"/>
    </properties>
   </object>
-  <object id="7" x="160" y="160" width="48" height="48">
+  <object id="22" x="160" y="160" width="48" height="48">
    <properties>
+    <property name="completedImage" value="Assets/Sprites/castle_cleared.png"/>
     <property name="destination" value="testlevel"/>
     <property name="id" type="int" value="3"/>
+    <property name="image" value="Assets/Sprites/castle_incomplete.png"/>
+    <property name="trigger" value="LevelEntrance"/>
+   </properties>
+  </object>
+  <object id="23" x="240" y="352" width="48" height="48">
+   <properties>
+    <property name="completedImage" value="Assets/Sprites/castle_cleared.png"/>
+    <property name="destination" value="smw"/>
+    <property name="id" type="int" value="1"/>
+    <property name="image" value="Assets/Sprites/castle_incomplete.png"/>
     <property name="trigger" value="LevelEntrance"/>
    </properties>
   </object>

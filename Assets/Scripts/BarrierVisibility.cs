@@ -7,23 +7,30 @@ public class BarrierVisibility : MonoBehaviour {
 
     private Collider2D col;
     private GameSession session;
+    private Renderer[] renderers;
 
 	// Use this for initialization
 	void Start () {
         col = GetComponent<Collider2D>();
         session = FindObjectOfType<GameSession>();
+        renderers = GetComponentsInChildren<Renderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    if (col == null || session == null)
+	    if (session == null)
         {
             return;
         }
 
-        if ((session.levelCompleteBit & levelCompletedCondition) != 0)
+        if (col != null && (session.levelCompleteBit & levelCompletedCondition) != 0)
         {
             col.enabled = false;
+        }
+
+        foreach (var renderer in renderers)
+        {
+            renderer.enabled = (session.levelCompleteBit & levelCompletedCondition) == 0;
         }
 	}
 }

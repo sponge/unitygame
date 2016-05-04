@@ -20,6 +20,8 @@ class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
 				var levelEntrance = gameObject.AddComponent<LevelEntrance> ();
 				levelEntrance.destination = keyValuePairs ["destination"];
                 levelEntrance.levelBit = (int) Mathf.Pow(2, int.Parse(keyValuePairs["id"]));
+                levelEntrance.image = AssetDatabase.LoadAssetAtPath<Sprite>(keyValuePairs["image"]);
+                levelEntrance.completedImage = AssetDatabase.LoadAssetAtPath<Sprite>(keyValuePairs["completedImage"]);
 				break;
 			}
         }
@@ -61,6 +63,13 @@ class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
 
     public void CustomizePrefab(GameObject prefab)
     {
+        var colliders = prefab.GetComponentsInChildren<BoxCollider2D>();
+        foreach (var col in colliders)
+        {
+            col.transform.localPosition = new Vector2(col.transform.localPosition.x + col.offset.x, col.transform.localPosition.y + col.offset.y);
+            col.offset = Vector2.zero;
+            Debug.Log(col.offset +"."+ col.size);
+        }
         Debug.Log("CustomizePrefab");
     }
 }
