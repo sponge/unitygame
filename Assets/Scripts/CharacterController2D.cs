@@ -161,6 +161,7 @@ public class CharacterController2D : MonoBehaviour
 	/// stores our raycast hit during movement
 	/// </summary>
     RaycastHit2D[] _raycastList = new RaycastHit2D[2];
+    RaycastHit2D[] _slopedRaycastList = new RaycastHit2D[2];
 
 	/// <summary>
 	/// stores any raycast hits that occur this frame. we have to store them in case we get a hit moving
@@ -443,16 +444,16 @@ public class CharacterController2D : MonoBehaviour
 				// safety check. we fire a ray in the direction of movement just in case the diagonal we calculated above ends up
 				// going through a wall. if the ray hits, we back off the horizontal movement to stay in bounds.
 				var ray = isGoingRight ? _raycastOrigins.bottomRight : _raycastOrigins.bottomLeft;
-				RaycastHit2D[] raycastList = new RaycastHit2D[2];
+
                 int num = 0;
 				if( collisionState.wasGroundedLastFrame )
-                    num = Physics2D.RaycastNonAlloc(ray, deltaMovement.normalized, raycastList, deltaMovement.magnitude, platformMask);
+                    num = Physics2D.RaycastNonAlloc(ray, deltaMovement.normalized, _slopedRaycastList, deltaMovement.magnitude, platformMask);
 				else
-                    num = Physics2D.RaycastNonAlloc(ray, deltaMovement.normalized, raycastList, deltaMovement.magnitude, platformMask & ~oneWayPlatformMask);
+                    num = Physics2D.RaycastNonAlloc(ray, deltaMovement.normalized, _slopedRaycastList, deltaMovement.magnitude, platformMask & ~oneWayPlatformMask);
 
                 for (var j = 0; j < num; j++)
 			    {
-                    var raycastHit = raycastList[j];
+                    var raycastHit = _slopedRaycastList[j];
 
                     if (raycastHit.collider == boxCollider)
                     {
