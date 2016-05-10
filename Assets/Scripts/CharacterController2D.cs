@@ -160,7 +160,7 @@ public class CharacterController2D : MonoBehaviour
 	/// <summary>
 	/// stores our raycast hit during movement
 	/// </summary>
-    RaycastHit2D[] _raycastList;
+    RaycastHit2D[] _raycastList = new RaycastHit2D[2];
 
 	/// <summary>
 	/// stores any raycast hits that occur this frame. we have to store them in case we get a hit moving
@@ -361,15 +361,17 @@ public class CharacterController2D : MonoBehaviour
 
 			DrawRay( ray, rayDirection * rayDistance, Color.red );
 
-			// if we are grounded we will include oneWayPlatforms only on the first ray (the bottom one). this will allow us to
-			// walk up sloped oneWayPlatforms
+            // if we are grounded we will include oneWayPlatforms only on the first ray (the bottom one). this will allow us to
+            // walk up sloped oneWayPlatforms
+            int num;
 			if( i == 0 && collisionState.wasGroundedLastFrame )
-				_raycastList = Physics2D.RaycastAll( ray, rayDirection, rayDistance, platformMask );
+				num = Physics2D.RaycastNonAlloc( ray, rayDirection, _raycastList, rayDistance, platformMask );
 			else
-				_raycastList = Physics2D.RaycastAll( ray, rayDirection, rayDistance, platformMask & ~oneWayPlatformMask );
+                num = Physics2D.RaycastNonAlloc(ray, rayDirection, _raycastList, rayDistance, platformMask & ~oneWayPlatformMask);
 
-            foreach (var _raycastHit in _raycastList)
+            for (var j = 0; j < num; j++)
 			{
+                var _raycastHit = _raycastList[j];
                 if (_raycastHit.collider == boxCollider)
                 {
                     continue;
@@ -441,14 +443,17 @@ public class CharacterController2D : MonoBehaviour
 				// safety check. we fire a ray in the direction of movement just in case the diagonal we calculated above ends up
 				// going through a wall. if the ray hits, we back off the horizontal movement to stay in bounds.
 				var ray = isGoingRight ? _raycastOrigins.bottomRight : _raycastOrigins.bottomLeft;
-				RaycastHit2D[] raycastList;
+				RaycastHit2D[] raycastList = new RaycastHit2D[2];
+                int num = 0;
 				if( collisionState.wasGroundedLastFrame )
-					raycastList = Physics2D.RaycastAll( ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask );
+                    num = Physics2D.RaycastNonAlloc(ray, deltaMovement.normalized, raycastList, deltaMovement.magnitude, platformMask);
 				else
-					raycastList = Physics2D.RaycastAll( ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask & ~oneWayPlatformMask );
+                    num = Physics2D.RaycastNonAlloc(ray, deltaMovement.normalized, raycastList, deltaMovement.magnitude, platformMask & ~oneWayPlatformMask);
 
-				foreach (var raycastHit in raycastList)
-				{
+                for (var j = 0; j < num; j++)
+			    {
+                    var raycastHit = raycastList[j];
+
                     if (raycastHit.collider == boxCollider)
                     {
                         continue;
@@ -495,10 +500,13 @@ public class CharacterController2D : MonoBehaviour
 			var ray = new Vector2( initialRayOrigin.x + i * _horizontalDistanceBetweenRays, initialRayOrigin.y );
 
 			DrawRay( ray, rayDirection * rayDistance, Color.red );
-            _raycastList = Physics2D.RaycastAll(ray, rayDirection, rayDistance, mask);
 
-            foreach (var _raycastHit in _raycastList)
-            {
+            var num = Physics2D.RaycastNonAlloc(ray, rayDirection, _raycastList, rayDistance, mask);
+
+            for (var j = 0; j < num; j++)
+		    {
+                var _raycastHit = _raycastList[j];
+
                 if (_raycastHit.collider == boxCollider)
                 {
                     continue;
@@ -551,9 +559,11 @@ public class CharacterController2D : MonoBehaviour
 
 		var slopeRay = new Vector2( centerOfCollider, _raycastOrigins.bottomLeft.y );
 		DrawRay( slopeRay, rayDirection * slopeCheckRayDistance, Color.yellow );
-		_raycastList = Physics2D.RaycastAll( slopeRay, rayDirection, slopeCheckRayDistance, platformMask );
-		foreach (var _raycastHit in _raycastList)
+		var num = Physics2D.RaycastNonAlloc( slopeRay, rayDirection, _raycastList, slopeCheckRayDistance, platformMask );
+        for (var j = 0; j < num; j++)
 		{
+            var _raycastHit = _raycastList[j];
+
             if (_raycastHit.collider == boxCollider)
             {
                 continue;
