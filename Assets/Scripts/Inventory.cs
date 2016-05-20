@@ -6,19 +6,22 @@ public class Inventory : MonoBehaviour {
     [System.Serializable]
     public struct Items
     {
+        public int xp;
+        public int maxHealth;
+        public int strength;
+
         public int coins;
+        public int redCoins;
+
         public bool redKey;
+        public bool blueKey;
+        public bool greenKey;
     }
 
     public Items items;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void ResetTemporaryItems()
+    {
+        items.redCoins = 0;
+    }
 }
