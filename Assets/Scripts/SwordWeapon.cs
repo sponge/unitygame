@@ -11,7 +11,7 @@ public class SwordWeapon : BaseWeapon
     private bool attackHeld;
     private float attackTime;
 
-    override public void Start()
+    public void Start()
     {
         isReady = true;
     }

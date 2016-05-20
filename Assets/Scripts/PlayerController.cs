@@ -74,6 +74,12 @@ public class PlayerController : MonoBehaviour {
         {
             goalComp.StartLevelExit();   
         }
+
+        var collectableComp = obj.GetComponent<BaseCollectable>();
+        if (collectableComp)
+        {
+            collectableComp.Collect(GetComponent<Inventory>());
+        }
     }
 
     private float getAccel(Direction direction)

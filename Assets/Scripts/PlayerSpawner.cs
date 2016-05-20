@@ -50,6 +50,13 @@ public class PlayerSpawner : MonoBehaviour {
 
         spawnInstance.transform.localPosition = pos;
 
+        if (session != null)
+        {
+            var inv = spawnInstance.GetComponent<Inventory>();
+            inv.items = session.inventoryItems;
+        }
+
+
         mainCamera.AddCameraTarget(spawnInstance.transform);
         mainCamera.MoveCameraInstantlyToPosition(pos);
     }

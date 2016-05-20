@@ -10,6 +10,7 @@ public class GameSession : MonoBehaviour {
 
     public Vector2 overworldPosition;
     public bool useSessionPosition;
+    public Inventory.Items inventoryItems;
 
     void Start()
     {
@@ -48,6 +49,10 @@ public class GameSession : MonoBehaviour {
     {
         StartCoroutine(EndLevelCoroutine());
         levelCompleteBit += currentLevelBit;
+
+        // FIXME: hardcoded for one player: save inventory out to global inventory
+        var player = FindObjectOfType<PlayerController>();
+        inventoryItems = player.GetComponent<Inventory>().items;
     }
 
     private IEnumerator EndLevelCoroutine() {

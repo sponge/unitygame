@@ -1,17 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BaseWeapon : MonoBehaviour {
-    public virtual void Start () {
-	
-	}
-
-    public virtual void UpdatePress (bool held) {
-	
-	}
-
-    public virtual bool isFiring()
-    {
-        return false;
-    }
+public abstract class BaseWeapon : MonoBehaviour {
+    public abstract void UpdatePress(bool held);
+    public abstract bool isFiring();
 }
