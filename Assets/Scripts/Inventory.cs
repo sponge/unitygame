@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour {
         public bool redKey;
         public bool blueKey;
         public bool greenKey;
+        public bool yellowKey;
     }
 
     public Items items;

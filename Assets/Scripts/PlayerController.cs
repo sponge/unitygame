@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     {
         controller = GetComponent<CharacterController2D>();
 		controller.onTriggerEnterEvent += onTriggerEnterEvent;
+        controller.onControllerCollidedEvent += Controller_onControllerCollidedEvent;
 
         animator = GetComponent<Animator>();
         weapon = GetComponent<BaseWeapon>();
@@ -55,6 +56,15 @@ public class PlayerController : MonoBehaviour {
         hurtable.onDeath += OnDeath;
 
         debugText = GameObject.Find("DebugText").GetComponent<Text>();
+    }
+
+    private void Controller_onControllerCollidedEvent(RaycastHit2D obj)
+    {
+        var triggerComp = obj.collider.gameObject.GetComponent<BaseTrigger>();
+        if (triggerComp)
+        {
+            triggerComp.Trigger(gameObject);
+        }
     }
 
     void onTriggerEnterEvent (Collider2D obj)
@@ -73,6 +83,12 @@ public class PlayerController : MonoBehaviour {
         if (goalComp)
         {
             goalComp.StartLevelExit();   
+        }
+
+        var triggerComp = obj.GetComponent<BaseTrigger>();
+        if (triggerComp)
+        {
+            triggerComp.Trigger(gameObject);
         }
 
         var collectableComp = obj.GetComponent<BaseCollectable>();
