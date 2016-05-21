@@ -50,9 +50,9 @@ public class PlayerSpawner : MonoBehaviour {
 
         spawnInstance.transform.localPosition = pos;
 
-        if (session != null)
+        var inv = spawnInstance.GetComponent<Inventory>();
+        if (session != null && inv != null)
         {
-            var inv = spawnInstance.GetComponent<Inventory>();
             inv.items = session.inventoryItems;
         }
 

@@ -24,5 +24,9 @@ public class Inventory : MonoBehaviour {
     public void ResetTemporaryItems()
     {
         items.redCoins = 0;
+        items.redKey = false;
+        items.blueKey = false;
+        items.greenKey = false;
+        items.yellowKey = false;
     }
 }

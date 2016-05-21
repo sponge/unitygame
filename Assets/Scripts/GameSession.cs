@@ -52,7 +52,10 @@ public class GameSession : MonoBehaviour {
 
         // FIXME: hardcoded for one player: save inventory out to global inventory
         var player = FindObjectOfType<PlayerController>();
-        inventoryItems = player.GetComponent<Inventory>().items;
+
+        var inv = player.GetComponent<Inventory>();
+        inv.ResetTemporaryItems();
+        inventoryItems = inv.items;
     }
 
     private IEnumerator EndLevelCoroutine() {

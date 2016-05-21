@@ -36,6 +36,51 @@
    <property name="prefab" value="Assets/GameObjects/Spawn.prefab"/>
   </properties>
  </tile>
+ <tile id="7">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/Door.prefab"/>
+  </properties>
+ </tile>
+ <tile id="8">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/RedDoor.prefab"/>
+  </properties>
+ </tile>
+ <tile id="9">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/GreenDoor.prefab"/>
+  </properties>
+ </tile>
+ <tile id="10">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/BlueDoor.prefab"/>
+  </properties>
+ </tile>
+ <tile id="11">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/YellowDoor.prefab"/>
+  </properties>
+ </tile>
+ <tile id="12">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/RedKey.prefab"/>
+  </properties>
+ </tile>
+ <tile id="13">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/GreenKey.prefab"/>
+  </properties>
+ </tile>
+ <tile id="14">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/BlueKey.prefab"/>
+  </properties>
+ </tile>
+ <tile id="15">
+  <properties>
+   <property name="prefab" value="Assets/GameObjects/YellowKey.prefab"/>
+  </properties>
+ </tile>
  <tile id="146">
   <properties>
    <property name="prefab" value="Assets/GameObjects/Coin.prefab"/>

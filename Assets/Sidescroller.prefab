@@ -165,7 +165,7 @@ Camera:
   far clip plane: 1000
   field of view: 58
   orthographic: 1
-  orthographic size: 100.5
+  orthographic size: 97.833336
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAsset: {fileID: 191544, guid: cac12cb8df0f4d8459617c89fc15f441, type: 2}
   mainCamera: {fileID: 11451204}
+  spawnerUsesSavedPosition: 0
 --- !u!114 &11404012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -392,11 +393,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProCamera2D: {fileID: 11451204}
   UseNumericBoundaries: 1
-  UseTopBoundary: 0
-  TopBoundary: 416
+  UseTopBoundary: 1
+  TopBoundary: 1
   TargetTopBoundary: 0
   UseBottomBoundary: 1
-  BottomBoundary: 0
+  BottomBoundary: 1
   TargetBottomBoundary: 0
   UseLeftBoundary: 1
   LeftBoundary: 0
