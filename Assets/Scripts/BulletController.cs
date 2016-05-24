@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 public class BulletController : MonoBehaviour {
+    public LayerMask collisionLayers;
     public Vector3 speed;
     public Vector2 size;
     public int damage;
@@ -14,7 +15,7 @@ public class BulletController : MonoBehaviour {
 
     private void Update() {
         var distance = Vector2.Distance(Vector2.zero, speed * Time.deltaTime);
-        var hit = Physics2D.BoxCast(transform.position, size, 0, speed, distance);
+        var hit = Physics2D.BoxCast(transform.position, size, 0, speed, distance, collisionLayers);
 
         if (hit.collider != null) {
             var hurtable = hit.collider.gameObject.GetComponent<Hurtable>();
@@ -23,7 +24,7 @@ public class BulletController : MonoBehaviour {
             }
 
             animator.Play(explodeAnim);
-            transform.position = hit.point;
+            transform.position = hit.centroid;
             Destroy(gameObject, 1.0f);
             enabled = false;
         }
