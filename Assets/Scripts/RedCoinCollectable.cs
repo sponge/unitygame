@@ -1,21 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿public class RedCoinCollectable : BaseCollectable {
 
-public class RedCoinCollectable : BaseCollectable
-{
-
-    void Start()
-    {
-
+    private void Start() {
     }
 
-    void Update()
-    {
-
+    private void Update() {
     }
 
-    public override void OnCollect(Inventory inventory)
-    {
+    public override void OnCollect(Inventory inventory) {
         inventory.items.redCoins += 1;
     }
 }

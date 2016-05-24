@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class LevelEntrance : MonoBehaviour {
-	public string destination;
+    public string destination;
     public int levelBit;
     public Sprite image;
     public Sprite completedImage;
@@ -12,16 +11,14 @@ public class LevelEntrance : MonoBehaviour {
     private SpriteRenderer sprite;
     private BoxCollider2D col;
 
-    void Awake()
-    {
+    private void Awake() {
         session = FindObjectOfType<GameSession>();
         col = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         sprite.sprite = (session.levelCompleteBit & levelBit) != 0 ? completedImage : image;
     }
 
-    public void Activate(GameObject activator)
-    {
+    public void Activate(GameObject activator) {
         session.LoadLevel(destination, false);
         session.currentLevelBit = levelBit;
         session.overworldPosition = activator.transform.localPosition;

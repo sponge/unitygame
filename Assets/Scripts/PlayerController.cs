@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using Prime31;
+﻿using Prime31;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -14,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     private BaseWeapon weapon;
     private Hurtable hurtable;
-	private Collider2D col;
+    private Collider2D col;
 
     private Text debugText;
 
@@ -40,17 +39,16 @@ public class PlayerController : MonoBehaviour {
     private float stunTime;
     private float accelType;
 
-    enum Direction { Left, Right };
+    private enum Direction { Left, Right };
 
-    void Awake()
-    {
+    private void Awake() {
         controller = GetComponent<CharacterController2D>();
-		controller.onTriggerEnterEvent += onTriggerEnterEvent;
+        controller.onTriggerEnterEvent += onTriggerEnterEvent;
         controller.onControllerCollidedEvent += Controller_onControllerCollidedEvent;
 
         animator = GetComponent<Animator>();
         weapon = GetComponent<BaseWeapon>();
-		col = GetComponent<Collider2D>();
+        col = GetComponent<Collider2D>();
 
         hurtable = GetComponent<Hurtable>();
         hurtable.onDeath += OnDeath;
@@ -58,58 +56,49 @@ public class PlayerController : MonoBehaviour {
         debugText = GameObject.Find("DebugText").GetComponent<Text>();
     }
 
-    private void Controller_onControllerCollidedEvent(RaycastHit2D obj)
-    {
+    private void Controller_onControllerCollidedEvent(RaycastHit2D obj) {
         var triggerComp = obj.collider.gameObject.GetComponent<BaseTrigger>();
-        if (triggerComp)
-        {
+        if (triggerComp) {
             triggerComp.Trigger(gameObject);
         }
     }
 
-    void onTriggerEnterEvent (Collider2D obj)
-    {
-		var hurtComp = obj.GetComponent<Hurtable>();
-		if (hurtComp && willPogo) {
-			var normal = Vector3.Normalize (new Vector3(col.bounds.center.x, col.bounds.min.y) - obj.bounds.center);
-			if (normal.y > 0.5f) {
-				hurtComp.Hurt (2, col.bounds.center);
-				controller.velocity.y = pogoJumpHeight;
-				controller.move (controller.velocity * Time.deltaTime);
-			}
-		}
+    private void onTriggerEnterEvent(Collider2D obj) {
+        var hurtComp = obj.GetComponent<Hurtable>();
+        if (hurtComp && willPogo) {
+            var normal = Vector3.Normalize(new Vector3(col.bounds.center.x, col.bounds.min.y) - obj.bounds.center);
+            if (normal.y > 0.5f) {
+                hurtComp.Hurt(2, col.bounds.center);
+                controller.velocity.y = pogoJumpHeight;
+                controller.move(controller.velocity * Time.deltaTime);
+            }
+        }
 
         var goalComp = obj.GetComponent<GoalController>();
-        if (goalComp)
-        {
-            goalComp.StartLevelExit();   
+        if (goalComp) {
+            goalComp.StartLevelExit();
         }
 
         var triggerComp = obj.GetComponent<BaseTrigger>();
-        if (triggerComp)
-        {
+        if (triggerComp) {
             triggerComp.Trigger(gameObject);
         }
 
         var collectableComp = obj.GetComponent<BaseCollectable>();
-        if (collectableComp)
-        {
+        if (collectableComp) {
             collectableComp.Collect(GetComponent<Inventory>());
         }
     }
 
-    private float getAccel(Direction direction)
-    {
+    private float getAccel(Direction direction) {
         var vel = controller.velocity;
         var isSkidding = ((direction == Direction.Left && vel.x > 0) || (direction == Direction.Right && vel.x < 0));
 
-        if (Time.time < stunTime)
-        {
+        if (Time.time < stunTime) {
             return 0;
         }
 
-        if (!controller.isGrounded)
-        {
+        if (!controller.isGrounded) {
             return isSkidding ? turnAirAccel : airAccel;
         }
 
@@ -117,10 +106,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (debugText)
-        {
+    private void Update() {
+        if (debugText) {
             debugText.text = "";
         }
 
@@ -132,8 +119,7 @@ public class PlayerController : MonoBehaviour {
 
         var vel = controller.velocity;
 
-        if (controller.isGrounded)
-        {
+        if (controller.isGrounded) {
             didJump = false;
             canDoubleJump = false;
         }
@@ -144,8 +130,7 @@ public class PlayerController : MonoBehaviour {
         wallSliding = false;
         canWallJump = !controller.isGrounded && (controller.collisionState.left || controller.collisionState.right);
 
-        if (vel.y < 0 && canWallJump)
-        {
+        if (vel.y < 0 && canWallJump) {
             wallSliding = true;
         }
 
@@ -156,56 +141,50 @@ public class PlayerController : MonoBehaviour {
         //     Tiny.addEntity(s.world, {event = 'stopsound', name = 'wallslide'})
         // end
 
-        if (wallSliding)
-        {
+        if (wallSliding) {
             vel.y = -wallSlideSpeed;
         }
 
-        if (!jumpPress && jumpHeld)
-        {
+        if (!jumpPress && jumpHeld) {
             jumpHeld = false;
-            if (vel.y > 0)
-            {
+            if (vel.y > 0) {
                 vel.y *= earlyJumpEndModifier;
             }
         }
 
-        if (!controller.isGrounded && (vel.y > 0 || !willPogo))
-        {
+        if (!controller.isGrounded && (vel.y > 0 || !willPogo)) {
             willPogo = downPress;
         }
 
         // check for pogo jump
-        if (controller.isGrounded && willPogo)
-        {
+        if (controller.isGrounded && willPogo) {
             vel.y = pogoJumpHeight;
             canDoubleJump = true;
             didJump = true;
             willPogo = false;
             // FIXME: pogo sound here
-        // check for other jumps
-        } else if (jumpPress && !jumpHeld)
-        {
+            // check for other jumps
+        }
+        else if (jumpPress && !jumpHeld) {
             // check for walljump
-            if (canWallJump)
-            {
+            if (canWallJump) {
                 vel.y = doubleJumpHeight;
                 vel.x = wallJumpX * (rightPress ? -1 : 1);
                 stunTime = Time.time + 0.1f;
                 jumpHeld = true;
                 didJump = true;
                 // FIXME: jump sound here
-            // check for first jump
-            } else if (controller.isGrounded)
-            {
+                // check for first jump
+            }
+            else if (controller.isGrounded) {
                 vel.y = jumpHeight + (Mathf.Abs(vel.x) >= maxSpeed * 0.25 ? speedJumpBonus : 0);
                 jumpHeld = true;
                 canDoubleJump = true;
                 didJump = true;
                 // FIXME: jump sound here
-            // check for second jump
-            } else if (canDoubleJump)
-            {
+                // check for second jump
+            }
+            else if (canDoubleJump) {
                 vel.y = doubleJumpHeight;
                 canDoubleJump = false;
                 jumpHeld = true;
@@ -214,26 +193,23 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (weapon)
-        {
+        if (weapon) {
             weapon.UpdatePress(attackPress);
         }
 
         // player wants to move left, check what their accel should be
         var lastAccel = accelType;
-        if ((leftPress || rightPress) && !weapon.isFiring())
-        {
+        if ((leftPress || rightPress) && !weapon.isFiring()) {
             accelType = getAccel(leftPress ? Direction.Left : Direction.Right);
             vel.x += accelType * Time.deltaTime * (leftPress ? -1 : 1);
             transform.localScale = new Vector3(leftPress ? -1 : 1, 1, 0);
-        } else if (vel.x != 0)
-        {
+        }
+        else if (vel.x != 0) {
             var friction = (controller.isGrounded ? groundFriction : airFriction) * Time.deltaTime;
-            if (friction > Mathf.Abs(vel.x))
-            {
+            if (friction > Mathf.Abs(vel.x)) {
                 vel.x = 0;
-            } else
-            {
+            }
+            else {
                 vel.x += friction * (vel.x > 0 ? -1 : 1);
             }
 
@@ -246,35 +222,31 @@ public class PlayerController : MonoBehaviour {
         var uncappedY = vel.y;
         vel.y = Mathf.Clamp(vel.y, -terminalVelocity, terminalVelocity);
 
-        if (weapon && weapon.isFiring())
-        {
+        if (weapon && weapon.isFiring()) {
             animator.Play(swordAnim);
-        } else if (willPogo)
-        {
+        }
+        else if (willPogo) {
             animator.Play(pogoAnim);
-        } else if (accelType == skidAccel)
-        {
+        }
+        else if (accelType == skidAccel) {
             animator.Play(skidAnim);
-        } else
-        {
+        }
+        else {
             animator.Play(controller.isGrounded && vel.x != 0 ? runAnim : idleAnim);
         }
 
-        if (debugText)
-        {
-            debugText.text += "Health: " + hurtable.currentHealth + "/" + hurtable.maxHealth +"\n";
+        if (debugText) {
+            debugText.text += "Health: " + hurtable.currentHealth + "/" + hurtable.maxHealth + "\n";
         }
 
         controller.move(vel * Time.deltaTime);
 
-        if (vel.y > 0 && !controller.collisionState.above)
-        {
+        if (vel.y > 0 && !controller.collisionState.above) {
             controller.velocity.y = uncappedY;
         }
-	}
+    }
 
-    void OnDeath()
-    {
+    private void OnDeath() {
         debugText.text = "You died! Press jump to respawn";
         Destroy(gameObject);
     }

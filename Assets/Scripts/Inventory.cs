@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Inventory : MonoBehaviour {
 
     [System.Serializable]
-    public struct Items
-    {
+    public struct Items {
         public int xp;
         public int maxHealth;
         public int strength;
@@ -21,8 +19,7 @@ public class Inventory : MonoBehaviour {
 
     public Items items;
 
-    public void ResetTemporaryItems()
-    {
+    public void ResetTemporaryItems() {
         items.redCoins = 0;
         items.redKey = false;
         items.blueKey = false;

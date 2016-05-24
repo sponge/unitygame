@@ -1,48 +1,41 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 // Example custom importer:
 [Tiled2Unity.CustomTiledImporter]
-class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
-{
-    public void HandleCustomProperties(GameObject gameObject,
-        IDictionary<string, string> keyValuePairs)
-    {
+internal class MyCustomImporter : Tiled2Unity.ICustomTiledImporter {
 
-        if (keyValuePairs.ContainsKey("trigger"))
-        {
+    public void HandleCustomProperties(GameObject gameObject,
+        IDictionary<string, string> keyValuePairs) {
+        if (keyValuePairs.ContainsKey("trigger")) {
             var collider = gameObject.GetComponent<Collider2D>();
             collider.isTrigger = true;
 
-			switch (keyValuePairs ["trigger"]) {
-			case "LevelEntrance":
-				var levelEntrance = gameObject.AddComponent<LevelEntrance> ();
-				levelEntrance.destination = keyValuePairs ["destination"];
-                levelEntrance.levelBit = (int) Mathf.Pow(2, int.Parse(keyValuePairs["id"]));
-                levelEntrance.image = AssetDatabase.LoadAssetAtPath<Sprite>(keyValuePairs["image"]);
-                levelEntrance.completedImage = AssetDatabase.LoadAssetAtPath<Sprite>(keyValuePairs["completedImage"]);
-				break;
-			}
+            switch (keyValuePairs["trigger"]) {
+                case "LevelEntrance":
+                    var levelEntrance = gameObject.AddComponent<LevelEntrance>();
+                    levelEntrance.destination = keyValuePairs["destination"];
+                    levelEntrance.levelBit = (int)Mathf.Pow(2, int.Parse(keyValuePairs["id"]));
+                    levelEntrance.image = AssetDatabase.LoadAssetAtPath<Sprite>(keyValuePairs["image"]);
+                    levelEntrance.completedImage = AssetDatabase.LoadAssetAtPath<Sprite>(keyValuePairs["completedImage"]);
+                    break;
+            }
         }
 
-        if (keyValuePairs.ContainsKey("hideIfCompleted"))
-        {
+        if (keyValuePairs.ContainsKey("hideIfCompleted")) {
             var barrier = gameObject.AddComponent<BarrierVisibility>();
             barrier.levelCompletedCondition = (int)Mathf.Pow(2, int.Parse(keyValuePairs["hideIfCompleted"]));
         }
 
-        if (keyValuePairs.ContainsKey("prefab"))
-        {
+        if (keyValuePairs.ContainsKey("prefab")) {
             Transform oldTileObject = gameObject.transform.Find("TileObject");
-            if (oldTileObject != null)
-            {
+            if (oldTileObject != null) {
                 Object.DestroyImmediate(oldTileObject.gameObject);
             }
 
             Object spawn = AssetDatabase.LoadAssetAtPath(keyValuePairs["prefab"], typeof(GameObject));
-            if (spawn != null)
-            {
+            if (spawn != null) {
                 // Replace with new spawn object
                 GameObject spawnInstance = (GameObject)Object.Instantiate(spawn);
                 spawnInstance.name = spawn.name;
@@ -52,23 +45,19 @@ class MyCustomImporter : Tiled2Unity.ICustomTiledImporter
                 spawnInstance.transform.localPosition = Vector3.zero;
 
                 var spr = spawnInstance.GetComponent<SpriteRenderer>();
-                if (spr)
-                {
+                if (spr) {
                     spawnInstance.transform.localPosition = new Vector2(spr.sprite.rect.width / 2, spr.sprite.rect.height / 2);
                 }
             }
         }
-
     }
 
-    public void CustomizePrefab(GameObject prefab)
-    {
+    public void CustomizePrefab(GameObject prefab) {
         var colliders = prefab.GetComponentsInChildren<BoxCollider2D>();
-        foreach (var col in colliders)
-        {
+        foreach (var col in colliders) {
             col.transform.localPosition = new Vector2(col.transform.localPosition.x + col.offset.x, col.transform.localPosition.y + col.offset.y);
             col.offset = Vector2.zero;
-            Debug.Log(col.offset +"."+ col.size);
+            Debug.Log(col.offset + "." + col.size);
         }
         Debug.Log("CustomizePrefab");
     }

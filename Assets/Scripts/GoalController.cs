@@ -1,20 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GoalController : MonoBehaviour {
+    private GameSession session;
 
-    GameSession session;
-
-    public void Awake()
-    {
+    public void Awake() {
         session = FindObjectOfType<GameSession>();
     }
 
-    public void StartLevelExit()
-    {
+    public void StartLevelExit() {
         var players = FindObjectsOfType<PlayerController>();
-        foreach (var player in players)
-        {
+        foreach (var player in players) {
             player.enabled = false;
             player.GetComponent<Hurtable>().invulnerable = true;
         }

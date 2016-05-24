@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour {
-
     public string overworldScene = "game_launch";
     public int levelCompleteBit;
     public int currentLevelBit;
@@ -12,11 +11,9 @@ public class GameSession : MonoBehaviour {
     public bool useSessionPosition;
     public Inventory.Items inventoryItems;
 
-    void Start()
-    {
+    private void Start() {
         var alreadyExists = FindObjectsOfType<GameSession>();
-        if (alreadyExists.Length > 1)
-        {
+        if (alreadyExists.Length > 1) {
             DestroyImmediate(gameObject);
             return;
         }
@@ -24,29 +21,23 @@ public class GameSession : MonoBehaviour {
         DontDestroyOnLoad(this);
     }
 
-    void Update()
-    {
-
+    private void Update() {
     }
 
-    public void LoadLevel(string scene, bool isWorld)
-    {
+    public void LoadLevel(string scene, bool isWorld) {
         var sceneName = "Levels/" + scene;
         SceneManager.LoadScene(sceneName);
 
-        if (isWorld)
-        {
+        if (isWorld) {
             overworldScene = sceneName;
         }
     }
 
-    public void ExitLevel()
-    {
+    public void ExitLevel() {
         SceneManager.LoadScene(overworldScene);
     }
 
-    public void WinLevel()
-    {
+    public void WinLevel() {
         StartCoroutine(EndLevelCoroutine());
         levelCompleteBit += currentLevelBit;
 
@@ -62,5 +53,4 @@ public class GameSession : MonoBehaviour {
         yield return new WaitForSeconds(5);
         ExitLevel();
     }
-
 }

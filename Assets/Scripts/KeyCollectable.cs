@@ -1,33 +1,23 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class KeyCollectable : BaseCollectable
-{
-
+﻿public class KeyCollectable : BaseCollectable {
     public bool redKey;
     public bool greenKey;
     public bool blueKey;
     public bool yellowKey;
 
-    public override void OnCollect(Inventory inventory)
-    {
-        if (redKey)
-        {
+    public override void OnCollect(Inventory inventory) {
+        if (redKey) {
             inventory.items.redKey = true;
         }
 
-        if (greenKey)
-        {
+        if (greenKey) {
             inventory.items.greenKey = true;
         }
 
-        if (blueKey)
-        {
+        if (blueKey) {
             inventory.items.blueKey = true;
         }
 
-        if (yellowKey)
-        {
+        if (yellowKey) {
             inventory.items.yellowKey = true;
         }
     }

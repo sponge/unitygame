@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using Prime31;
+﻿using Prime31;
+using UnityEngine;
 
 public class OverworldPlayerController : MonoBehaviour {
-
     public float speed;
 
     private CharacterController2D controller;
@@ -12,8 +10,7 @@ public class OverworldPlayerController : MonoBehaviour {
     private LevelEntrance currentEntrance;
 
     // Use this for initialization
-    void Start()
-    {
+    private void Start() {
         controller = GetComponent<CharacterController2D>();
         controller.onTriggerEnterEvent += Controller_onTriggerEnterEvent;
         controller.onTriggerExitEvent += Controller_onTriggerExitEvent;
@@ -21,37 +18,32 @@ public class OverworldPlayerController : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    private void Controller_onTriggerEnterEvent(Collider2D obj)
-    {
+    private void Controller_onTriggerEnterEvent(Collider2D obj) {
         currentEntrance = obj.gameObject.GetComponent<LevelEntrance>();
     }
 
-    private void Controller_onTriggerExitEvent(Collider2D obj)
-    {
+    private void Controller_onTriggerExitEvent(Collider2D obj) {
         currentEntrance = null;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    private void Update() {
         var leftPress = Input.GetKey(KeyCode.LeftArrow);
         var downPress = Input.GetKey(KeyCode.DownArrow);
         var rightPress = Input.GetKey(KeyCode.RightArrow);
         var upPress = Input.GetKey(KeyCode.UpArrow);
         var usePress = Input.GetKey(KeyCode.Z);
 
-        if (usePress && currentEntrance != null)
-        {
+        if (usePress && currentEntrance != null) {
             currentEntrance.Activate(this.gameObject);
         }
 
         var vel = controller.velocity;
 
         vel.x = rightPress ? speed : leftPress ? -speed : 0;
-        vel.y = upPress ? speed : downPress? -speed : 0;
+        vel.y = upPress ? speed : downPress ? -speed : 0;
 
-        if (vel.x != 0)
-        {
+        if (vel.x != 0) {
             sprite.flipX = vel.x < 0;
         }
 

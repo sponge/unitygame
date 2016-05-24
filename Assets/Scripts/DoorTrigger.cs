@@ -1,25 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class DoorTrigger : BaseTrigger
-{
-
+public class DoorTrigger : BaseTrigger {
     public bool redKeyOpens;
     public bool greenKeyOpens;
     public bool blueKeyOpens;
     public bool yellowKeyOpens;
 
-    public override void OnTrigger(GameObject triggerObj)
-    {
-        if (!redKeyOpens && !greenKeyOpens && !blueKeyOpens && !yellowKeyOpens)
-        {
+    public override void OnTrigger(GameObject triggerObj) {
+        if (!redKeyOpens && !greenKeyOpens && !blueKeyOpens && !yellowKeyOpens) {
             Destroy(gameObject);
         }
 
         var inventory = triggerObj.GetComponent<Inventory>();
 
-        if (inventory == null)
-        {
+        if (inventory == null) {
             Debug.Log("couldn't find an inventory");
             return;
         }
@@ -29,8 +23,7 @@ public class DoorTrigger : BaseTrigger
             (greenKeyOpens && inventory.items.greenKey) ||
             (blueKeyOpens && inventory.items.blueKey) ||
             (yellowKeyOpens && inventory.items.yellowKey)
-            )
-        {
+            ) {
             Destroy(gameObject);
         }
     }

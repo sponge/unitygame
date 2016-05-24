@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class MainMenu : MonoBehaviour {
 
@@ -11,28 +10,25 @@ public class MainMenu : MonoBehaviour {
         "testlevel"
     };
 
-    public void OverworldClick()
-    {
+    public void OverworldClick() {
         var sess = FindObjectOfType<GameSession>();
         sess.LoadLevel("overworld", true);
     }
 
-    public void StartClick()
-    {
+    public void StartClick() {
         var sess = FindObjectOfType<GameSession>();
         var dropdown = GetComponentInChildren<Dropdown>();
         sess.LoadLevel(levels[dropdown.value], false);
     }
 
     // Use this for initialization
-    void Start () {
+    private void Start() {
         var dropdown = GetComponentInChildren<Dropdown>();
         dropdown.ClearOptions();
         dropdown.AddOptions(levels);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
+    // Update is called once per frame
+    private void Update() {
+    }
 }
