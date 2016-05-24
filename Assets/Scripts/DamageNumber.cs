@@ -19,11 +19,7 @@ public class DamageNumber : MonoBehaviour {
         textMesh.color = Color.white;
         textMesh.text = value;
         iTween.MoveBy(gameObject, new Vector3(0, 8, 0), lifetime);
-        iTween.FadeTo(gameObject, iTween.Hash("alpha", 0, "time", lifetime, "onComplete", "onComplete"));
-    }
-	
-	void onComplete()
-    {
-        Destroy(gameObject);
+        iTween.FadeTo(gameObject, iTween.Hash("alpha", 0, "time", lifetime));
+        Destroy(gameObject, lifetime);
     }
 }
