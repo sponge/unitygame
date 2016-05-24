@@ -23,6 +23,7 @@ public class BulletController : MonoBehaviour {
             }
 
             animator.Play(explodeAnim);
+            transform.position = hit.point;
             Destroy(gameObject, 1.0f);
             enabled = false;
         }
