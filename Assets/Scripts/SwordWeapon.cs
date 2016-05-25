@@ -27,7 +27,7 @@ public class SwordWeapon : BaseWeapon {
         return Time.time < attackTime;
     }
 
-    public void Fire() {
+    override public void Fire() {
         attackTime = Time.time + 0.5f;
         attackHeld = true;
     }
