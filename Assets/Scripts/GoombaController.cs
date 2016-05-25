@@ -1,4 +1,5 @@
 ﻿using Prime31;
+using System.Collections;
 using UnityEngine;
 
 public class GoombaController : MonoBehaviour {
@@ -36,7 +37,7 @@ public class GoombaController : MonoBehaviour {
             vel.x = speed * (flipSpeed ? -1 : 1);
         }
 
-        vel.y -= 625 * Time.deltaTime;
+        vel.y -= gravity * Time.deltaTime;
 
         controller.move(vel * Time.deltaTime);
     }

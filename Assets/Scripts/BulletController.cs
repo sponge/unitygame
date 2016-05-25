@@ -5,12 +5,14 @@ public class BulletController : MonoBehaviour {
     public Vector3 speed;
     public Vector2 size;
     public int damage;
+    public float lifetime;
 
     private int explodeAnim = Animator.StringToHash("blaster_explode");
     private Animator animator;
 
     private void Start() {
         animator = GetComponent<Animator>();
+        Destroy(gameObject, lifetime);
     }
 
     private void Update() {

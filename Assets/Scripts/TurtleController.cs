@@ -86,7 +86,7 @@ public class TurtleController : MonoBehaviour {
             vel.x = speed * (flipSpeed ? -1 : 1);
         }
 
-        vel.y -= 625 * Time.deltaTime;
+        vel.y -= gravity * Time.deltaTime;
 
         sprite.flipX = vel.x > 0;
 

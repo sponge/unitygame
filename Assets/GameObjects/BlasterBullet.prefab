@@ -64,6 +64,7 @@ MonoBehaviour:
   speed: {x: -120, y: 0, z: 0}
   size: {x: 9, y: 9}
   damage: 2
+  lifetime: 8
 --- !u!212 &21221260
 SpriteRenderer:
   m_ObjectHideFlags: 1
