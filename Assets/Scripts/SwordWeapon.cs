@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class SwordWeapon : BaseWeapon {
-    public Vector3 handOffset;
     public float length;
     public int damage;
 
