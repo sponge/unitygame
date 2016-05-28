@@ -4,24 +4,26 @@ public class BlasterWeapon : BaseWeapon {
     public int damage;
     public int burstAmount;
     public float burstSpeed;
-    public GameObject projectile;
+    public BulletController projectile;
 
-    private bool isReady;
     private bool attackHeld;
     private float attackTime;
     private int shotsTaken = 0;
     private bool burstActive = false;
 
     public void Start() {
-        isReady = true;
     }
 
     override public void UpdatePress(bool attackPress) {
-        if (attackHeld && !attackPress && isReady) {
+        if (!burstActive) {
+            return;
+        }
+
+        if (attackHeld && !attackPress) {
             attackHeld = false;
         }
 
-        if (attackPress && !attackHeld && Time.time > attackTime) {
+        if (attackPress && !attackHeld) {
             Fire();
         }
     }
@@ -37,18 +39,18 @@ public class BlasterWeapon : BaseWeapon {
     }
 
     public void Update() {
-        if (burstActive && Time.time > attackTime + (shotsTaken * burstSpeed)) {
-            var spawnInstance = Instantiate(projectile);
-            spawnInstance.transform.localPosition = gameObject.transform.position + handOffset;
+        if (!(burstActive && Time.time > attackTime + shotsTaken * burstSpeed)) {
+            return;
+        }
 
-            var bullet = spawnInstance.GetComponent<BulletController>();
-            bullet.damage = damage;
+        var bullet = Instantiate(projectile);
+        bullet.transform.localPosition = gameObject.transform.position + handOffset;
+        bullet.damage = damage;
 
-            shotsTaken++;
-            if (shotsTaken >= burstAmount) {
-                burstActive = false;
-                shotsTaken = 0;
-            }
+        shotsTaken++;
+        if (shotsTaken >= burstAmount) {
+            burstActive = false;
+            shotsTaken = 0;
         }
     }
 }
