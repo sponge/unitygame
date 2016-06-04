@@ -3,6 +3,7 @@
 public class SwordWeapon : BaseWeapon {
     public float length;
     public int damage;
+    public float swingTime;
 
     private bool isReady;
     private bool attackHeld;
@@ -27,7 +28,7 @@ public class SwordWeapon : BaseWeapon {
     }
 
     override public void Fire() {
-        attackTime = Time.time + 0.5f;
+        attackTime = Time.time + swingTime;
         attackHeld = true;
     }
 
