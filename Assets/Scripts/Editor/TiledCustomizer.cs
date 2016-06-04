@@ -46,7 +46,10 @@ internal class MyCustomImporter : Tiled2Unity.ICustomTiledImporter {
 
                 var spr = spawnInstance.GetComponent<SpriteRenderer>();
                 if (spr) {
-                    spawnInstance.transform.localPosition = new Vector2(spr.sprite.rect.width / 2, spr.sprite.rect.height / 2);
+                    // FIXME: this is still wrong because of differences between position anchor.
+                    // i think i need height / 16 rounded up (eg 8,16 for a door, 8,8 for a coin)
+                    // might need to be per-prefab (something thats not 2 tiles tall but should be placed on the bottom)
+                    spawnInstance.transform.localPosition = new Vector2(spr.sprite.rect.width / 2 + (16 - spr.sprite.rect.width) / 2, spr.sprite.rect.height / 2);
                 }
             }
         }
